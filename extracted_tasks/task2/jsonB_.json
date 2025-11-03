@@ -1,0 +1,53 @@
+{
+    "name": "QNX_ECU_Config",
+    "version": "2.1",
+    "dependencies": {
+        "SensorManager": {
+            "binary": "/opt/qnx/bin/sensor_mgr",
+            "version": "3.4.1",
+            "required": true,
+            "threads": 4,
+            "interfaces": ["eth0", "can0"],
+            "supervised": true
+        },
+        "ActuatorUnit": {
+            "binary": "/opt/qnx/bin/actuator_ctrl",
+            "version": "2.9.0",
+            "required": true,
+            "threads": 2,
+            "interfaces": ["can0"],
+            "supervised": false
+        },
+        "Gateway": {
+            "binary": "/opt/qnx/bin/gateway",
+            "version": "1.2.5",
+            "required": false,
+            "threads": 1,
+            "interfaces": ["eth0", "can0"],
+            "supervised": false
+        }
+    },
+    "tasks": [
+        {
+            "id": 1,
+            "task_name": "StartupInit",
+            "owner": "SensorManager",
+            "priority": 10,
+            "state": "running"
+        },
+        {
+            "id": 2,
+            "task_name": "CAN_Receive",
+            "owner": "Gateway",
+            "priority": 8,
+            "state": "sleeping"
+        },
+        {
+            "id": 3,
+            "task_name": "ActuatorFeedback",
+            "owner": "ActuatorUnit",
+            "priority": 9,
+            "state": "stopped"
+        }
+    ]
+}

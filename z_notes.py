@@ -20,10 +20,26 @@ myvar = json.loads(key)
 # print(json.dumps(myvar))
 
 
-with open('dict.json', 'r') as dict:
-    filejson = json.loads(dict.read())
-filejson.update(add)
+# with open('dict.json', 'r') as dict:
+#     filejson = json.loads(dict.read())
+# filejson.update(add)
 
 
-with open('dict.json', 'w') as json_final:
-    json_final.write(json.dumps(filejson))
+# with open('dict.json', 'w') as json_final:
+#     json_final.write(json.dumps(filejson))
+
+
+zipfile_path = pathlib.Path('./extracted_tasks/Task1.zip')
+
+with zipfile.ZipFile(zipfile_path, 'r') as zip_ref:
+    zip_ref.extractall(pathlib.Path('extracted_tasks/task1'))
+
+
+zipfile_path = pathlib.Path('./extracted_tasks/Task2.zip')
+
+with zipfile.ZipFile(zipfile_path, 'r') as zip_ref:
+    zip_ref.extractall(pathlib.Path('extracted_tasks/task2'))
+
+conn = sqlite3.connect('./extracted_tasks/tast1/jsonDataSetC.dbc')
+cursor = conn.cursor()
+
