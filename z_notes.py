@@ -49,6 +49,7 @@ with zipfile.ZipFile(zipfile_path, 'r') as zip_ref:
 import xml.etree.ElementTree as ET
 
 tree = ET.parse('./extracted_tasks/task1/DataSetB.xml')
+ET.indent(tree, space='    ', level=0)
 # print(type(tree))
 # print(tree.getroot())
 root = tree.getroot()
@@ -61,7 +62,6 @@ root = tree.getroot()
 
 
 itered = root.iter('Signal')
-
 notitered = root.findall('.//Signal')
 print(notitered)
 
@@ -70,14 +70,15 @@ root.append(ET.Element('Signal', attrib={'name':'NewSignal','datatype':'int','un
 
 def pew(elem):
     elem.attrib['name'] = 'HOTHOTHOTHOT'
-
-for elem in itered:
+    elem.tail
+    root.find('.//TxMessage').append(ET.Element('Signal', attrib={'name':'NewSignal'}))
+    
+for elem in notitered:
     pew(elem) if elem.attrib['name'] == 'Temperature' and \
     elem.attrib['datatype'] == 'float' and \
     elem.attrib['unit'] == 'Celsius' and \
     elem.attrib['offset'] == '0' \
-        else root.remove(elem)
-        
+        else notitered.remove(elem), 
     # pew(elem)
     print(elem.attrib)
 tree.write('./DataSetB_modified.xml')

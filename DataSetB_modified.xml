@@ -4,28 +4,26 @@
             <ECU name="SensorManager" address="10.0.0.2">
                 <TxMessage name="SensorStatus" id="100" cycleTime="100">
                     <Signal name="HOTHOTHOTHOT" datatype="float" length="32" unit="Celsius" offset="0" />
-                    <Signal name="Pressure" datatype="float" length="32" unit="Bar" offset="32"><Calibration type="linear" slope="1" intercept="0" /></Signal>
-                    <Signal name="Humidity" datatype="float" length="32" unit="%" offset="64"><Calibration type="linear" slope="1" intercept="0" /></Signal>
-                </TxMessage>
+                    <Signal name="Pressure" datatype="float" length="32" unit="Bar" offset="32" />
+                    <Signal name="Humidity" datatype="float" length="32" unit="%" offset="64" />
+                <Signal name="NewSignal" /></TxMessage>
                 <RxMessage name="ControlCommand" id="200" cycleTime="100">
-                    <Signal name="CommandID" datatype="uint16" length="16" offset="0"><Calibration type="linear" slope="1" intercept="0" /></Signal>
-                    <Signal name="Value" datatype="uint16" length="16" offset="16"><Calibration type="linear" slope="1" intercept="0" /></Signal>
+                    <Signal name="CommandID" datatype="uint16" length="16" offset="0" />
+                    <Signal name="Value" datatype="uint16" length="16" offset="16" />
                 </RxMessage>
             </ECU>
-
             <ECU name="ActuatorUnit" address="10.0.0.3">
                 <TxMessage name="ActuatorFeedback" id="300" cycleTime="50">
-                    <Signal name="MotorSpeed" datatype="float" length="32" unit="RPM" offset="0"><Calibration type="linear" slope="1" intercept="0" /></Signal>
-                    <Signal name="Torque" datatype="float" length="32" unit="Nm" offset="32"><Calibration type="linear" slope="1" intercept="0" /></Signal>
+                    <Signal name="MotorSpeed" datatype="float" length="32" unit="RPM" offset="0" />
+                    <Signal name="Torque" datatype="float" length="32" unit="Nm" offset="32" />
                 </TxMessage>
                 <RxMessage name="ControlCommand" id="200" />
             </ECU>
         </Cluster>
     </EthernetNetwork>
-
     <Metadata>
         <Author>John DOe</Author>
         <Date>2025-10-24</Date>
         <Description>Example Ethernet DB</Description>
     </Metadata>
-<Signal name="NewSignal" datatype="int" unit="units" offset="0"><Calibration type="linear" slope="1" intercept="0" /></Signal></NetworkDatabase>
+<Signal name="NewSignal" datatype="int" unit="units" offset="0" /></NetworkDatabase>
