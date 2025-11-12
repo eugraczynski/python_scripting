@@ -29,6 +29,11 @@ myvar = json.loads(key)
 #     json_final.write(json.dumps(filejson))
 
 
+zipfile_path = pathlib.Path('Tasks.zip')
+
+with zipfile.ZipFile(zipfile_path, 'r') as zip_ref:
+    zip_ref.extractall(pathlib.Path('extracted_tasks/'))
+
 zipfile_path = pathlib.Path('./extracted_tasks/Task1.zip')
 
 with zipfile.ZipFile(zipfile_path, 'r') as zip_ref:
@@ -40,6 +45,40 @@ zipfile_path = pathlib.Path('./extracted_tasks/Task2.zip')
 with zipfile.ZipFile(zipfile_path, 'r') as zip_ref:
     zip_ref.extractall(pathlib.Path('extracted_tasks/task2'))
 
-conn = sqlite3.connect('./extracted_tasks/tast1/jsonDataSetC.dbc')
-cursor = conn.cursor()
 
+import xml.etree.ElementTree as ET
+
+tree = ET.parse('./extracted_tasks/task1/DataSetB.xml')
+# print(type(tree))
+# print(tree.getroot())
+root = tree.getroot()
+# print(root.tag, root.attrib['name'], root[0][0])
+
+# for child in root:
+#     print(child)
+
+
+
+
+itered = root.iter('Signal')
+
+notitered = root.findall('.//Signal')
+print(notitered)
+
+root.findall('.//Signal[@name="Temperature"]')
+root.append(ET.Element('Signal', attrib={'name':'NewSignal','datatype':'int','unit':'units','offset':'0'}))
+
+def pew(elem):
+    elem.attrib['name'] = 'HOTHOTHOTHOT'
+
+for elem in itered:
+    pew(elem) if elem.attrib['name'] == 'Temperature' and \
+    elem.attrib['datatype'] == 'float' and \
+    elem.attrib['unit'] == 'Celsius' and \
+    elem.attrib['offset'] == '0' \
+        else root.remove(elem)
+        
+    # pew(elem)
+    print(elem.attrib)
+tree.write('./DataSetB_modified.xml')
+# [elem.tag for elem in root.iter()]
