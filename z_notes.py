@@ -80,9 +80,7 @@ for elem in notitered:
     elem.attrib['datatype'] == 'float' and \
     elem.attrib['unit'] == 'Celsius' and \
     elem.attrib['offset'] == '0' \
-        else notitered.remove(elem), 
-    # pew(elem)
-    # print(elem.attrib)
+        else notitered.remove(elem)
 
 # should be at the end of file to apply indentation to whole xml
 ET.indent(tree, space='    ', level=0)
