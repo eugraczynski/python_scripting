@@ -1,4 +1,5 @@
 import argparse
+import cantools
 import json
 import zipfile
 import pathlib
@@ -30,22 +31,23 @@ myvar = json.loads(key)
 #     json_final.write(json.dumps(filejson))
 
 
-zipfile_path = pathlib.Path('Tasks.zip')
+def unpack_the_zip():
 
-with zipfile.ZipFile(zipfile_path, 'r') as zip_ref:
-    zip_ref.extractall(pathlib.Path('extracted_tasks/'))
+    zipfile_path = pathlib.Path('Tasks.zip')
 
-zipfile_path = pathlib.Path('./extracted_tasks/Task1.zip')
+    with zipfile.ZipFile(zipfile_path, 'r') as zip_ref:
+        zip_ref.extractall(pathlib.Path('extracted_tasks/'))
 
-with zipfile.ZipFile(zipfile_path, 'r') as zip_ref:
-    zip_ref.extractall(pathlib.Path('extracted_tasks/task1'))
+    zipfile_path = pathlib.Path('./extracted_tasks/Task1.zip')
+
+    with zipfile.ZipFile(zipfile_path, 'r') as zip_ref:
+        zip_ref.extractall(pathlib.Path('extracted_tasks/task1'))
 
 
-zipfile_path = pathlib.Path('./extracted_tasks/Task2.zip')
+    zipfile_path = pathlib.Path('./extracted_tasks/Task2.zip')
 
-with zipfile.ZipFile(zipfile_path, 'r') as zip_ref:
-    zip_ref.extractall(pathlib.Path('extracted_tasks/task2'))
-
+    with zipfile.ZipFile(zipfile_path, 'r') as zip_ref:
+        zip_ref.extractall(pathlib.Path('extracted_tasks/task2'))
 
 
 def pack_the_zip():
@@ -59,35 +61,54 @@ def pack_the_zip():
                 zip_ref.write(filepath)
         zip_ref.write('DataSetB_modified.xml')
 
+
+
+def xml_changer():
+    tree = ET.parse('./extracted_tasks/task1/DataSetB.xml')
+    root = tree.getroot()
+
+    itered = root.iter('Signal')
+    # print('DEBUG - Itered by "Signal":\n', itered)
+    notitered = root.findall('.//TxMessage/Signal[@name="Temperature"]')
+    # print("DEBUG - Itered by findall(//path/to/file'):\n", notitered)
+
+    root.append(ET.Element('Signal', attrib={'name':'Last Signal','datatype':'int','unit':'units','offset':'0'}))
+
+    def pew(elem):
+        elem.attrib['name'] = 'HOTHOTHOTHOT'
+        root.find('.//TxMessage').append(ET.Element('Signal', attrib={'name':'NewSignal'}))
+        
+    for elem in notitered:
+        # ternary 
+        pew(elem) if elem.attrib['name'] == 'Temperature' and \
+        elem.attrib['datatype'] == 'float' and \
+        elem.attrib['unit'] == 'Celsius' and \
+        elem.attrib['offset'] == '0' \
+            else notitered.remove(elem)
+
+    # should be at the end of file to apply indentation to whole xml
+    ET.indent(tree, space='    ', level=0)
+
+    root.append(ET.Element('Tail', attrib={'MyTail':'MyRules'}))
+    root.tail = '\n\nthis is tail, hi'
+
+    tree.write('./DataSetB_modified.xml')
+
+def db_checker():
+    db = cantools.database.load_file('./extracted_tasks/task1/DataSetC.dbc')
+    answer = db.messages
+    # print(db)
+
+    get_message = db.get_message_by_name("ControlCommand")
+    print(get_message.signals)
+
+    for ans in answer:
+        # print('Full answer - ', ans)
+        for signal in ans.signals:
+            print(signal)
+
+
+unpack_the_zip()
+db_checker()
+xml_changer()
 pack_the_zip()
-
-tree = ET.parse('./extracted_tasks/task1/DataSetB.xml')
-root = tree.getroot()
-
-itered = root.iter('Signal')
-# print('DEBUG - Itered by "Signal":\n', itered)
-notitered = root.findall('.//TxMessage/Signal[@name="Temperature"]')
-# print("DEBUG - Itered by findall(//path/to/file'):\n", notitered)
-
-root.append(ET.Element('Signal', attrib={'name':'Last Signal','datatype':'int','unit':'units','offset':'0'}))
-
-def pew(elem):
-    elem.attrib['name'] = 'HOTHOTHOTHOT'
-    root.find('.//TxMessage').append(ET.Element('Signal', attrib={'name':'NewSignal'}))
-    
-for elem in notitered:
-    pew(elem) if elem.attrib['name'] == 'Temperature' and \
-    elem.attrib['datatype'] == 'float' and \
-    elem.attrib['unit'] == 'Celsius' and \
-    elem.attrib['offset'] == '0' \
-        else notitered.remove(elem)
-
-# should be at the end of file to apply indentation to whole xml
-ET.indent(tree, space='    ', level=0)
-
-root.append(ET.Element('Tail', attrib={'MyTail':'MyRules'}))
-root.tail = '\n\nthis is tail, hi'
-
-tree.write('./DataSetB_modified.xml')
-
-
