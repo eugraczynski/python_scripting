@@ -6,7 +6,8 @@
                     <Signal name="HOTHOTHOTHOT" datatype="float" length="32" unit="Celsius" offset="0" />
                     <Signal name="Pressure" datatype="float" length="32" unit="Bar" offset="32" />
                     <Signal name="Humidity" datatype="float" length="32" unit="%" offset="64" />
-                <Signal name="NewSignal" /></TxMessage>
+                    <Signal name="NewSignal" />
+                </TxMessage>
                 <RxMessage name="ControlCommand" id="200" cycleTime="100">
                     <Signal name="CommandID" datatype="uint16" length="16" offset="0" />
                     <Signal name="Value" datatype="uint16" length="16" offset="16" />
@@ -26,4 +27,7 @@
         <Date>2025-10-24</Date>
         <Description>Example Ethernet DB</Description>
     </Metadata>
-<Signal name="NewSignal" datatype="int" unit="units" offset="0" /></NetworkDatabase>
+    <Signal name="Last Signal" datatype="int" unit="units" offset="0" />
+<Tail MyTail="MyRules" /></NetworkDatabase>
+
+this is tail, hi

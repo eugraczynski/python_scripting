@@ -2,7 +2,8 @@ import argparse
 import json
 import zipfile
 import pathlib
-import sqlite3
+import os
+import xml.etree.ElementTree as ET
 
 key = '{ "key": "value", "key": "value", "key": "value"}'
 
@@ -46,31 +47,32 @@ with zipfile.ZipFile(zipfile_path, 'r') as zip_ref:
     zip_ref.extractall(pathlib.Path('extracted_tasks/task2'))
 
 
-import xml.etree.ElementTree as ET
+
+def pack_the_zip():
+    zipfile_path = pathlib.Path('packed_config.zip')
+    mydir = 'extracted_tasks'
+    with zipfile.ZipFile(zipfile_path, 'w') as zip_ref:
+        for dirpath, b, filenames in os.walk(mydir):
+            zip_ref.write(dirpath)
+            for filename in filenames:
+                filepath = os.path.join(dirpath, filename)
+                zip_ref.write(filepath)
+        zip_ref.write('DataSetB_modified.xml')
+
+pack_the_zip()
 
 tree = ET.parse('./extracted_tasks/task1/DataSetB.xml')
-ET.indent(tree, space='    ', level=0)
-# print(type(tree))
-# print(tree.getroot())
 root = tree.getroot()
-# print(root.tag, root.attrib['name'], root[0][0])
-
-# for child in root:
-#     print(child)
-
-
-
 
 itered = root.iter('Signal')
-notitered = root.findall('.//Signal')
-print(notitered)
+# print('DEBUG - Itered by "Signal":\n', itered)
+notitered = root.findall('.//TxMessage/Signal[@name="Temperature"]')
+# print("DEBUG - Itered by findall(//path/to/file'):\n", notitered)
 
-root.findall('.//Signal[@name="Temperature"]')
-root.append(ET.Element('Signal', attrib={'name':'NewSignal','datatype':'int','unit':'units','offset':'0'}))
+root.append(ET.Element('Signal', attrib={'name':'Last Signal','datatype':'int','unit':'units','offset':'0'}))
 
 def pew(elem):
     elem.attrib['name'] = 'HOTHOTHOTHOT'
-    elem.tail
     root.find('.//TxMessage').append(ET.Element('Signal', attrib={'name':'NewSignal'}))
     
 for elem in notitered:
@@ -80,6 +82,14 @@ for elem in notitered:
     elem.attrib['offset'] == '0' \
         else notitered.remove(elem), 
     # pew(elem)
-    print(elem.attrib)
+    # print(elem.attrib)
+
+# should be at the end of file to apply indentation to whole xml
+ET.indent(tree, space='    ', level=0)
+
+root.append(ET.Element('Tail', attrib={'MyTail':'MyRules'}))
+root.tail = '\n\nthis is tail, hi'
+
 tree.write('./DataSetB_modified.xml')
-# [elem.tag for elem in root.iter()]
+
+
