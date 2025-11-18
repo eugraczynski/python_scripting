@@ -100,14 +100,20 @@ def db_checker():
     # print(db)
 
     get_message = db.get_message_by_name("ControlCommand")
-    print(get_message.signals)
+    # print(get_message.signals)
 
     for ans in answer:
         # print('Full answer - ', ans)
         for signal in ans.signals:
-            print(signal)
-
-
+            print(signal.name, \
+                    signal.start, \
+                    signal.length, \
+                    signal.conversion.scale, \
+                    signal.minimum, signal.maximum, \
+                    signal.unit, \
+                    signal.receivers)
+            
+            
 unpack_the_zip()
 db_checker()
 xml_changer()
