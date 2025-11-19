@@ -91,16 +91,15 @@ def xml_changer():
 
     root.append(ET.Element('Tail', attrib={'MyTail':'MyRules'}))
     root.tail = '\n\nthis is tail, hi'
-
     tree.write('./DataSetB_modified.xml')
 
 def db_checker():
     db = cantools.database.load_file('./extracted_tasks/task1/DataSetC.dbc')
     answer = db.messages
-    print(db)
+    # print(db)
 
     get_message = db.get_message_by_name("ControlCommand")
-    # print(get_message.signals)
+    print(get_message.signals)
 
     for ans in answer:
         # print('Full answer - ', ans)
