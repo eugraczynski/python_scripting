@@ -11,24 +11,22 @@ key = '{ "key": "value", "key": "value", "key": "value"}'
 key2 = {'keys':'val'}
 key2['pair'] = 'ars'
 
-# keisy = str({"1":"1"})
-# print(key["nested_object"]["key2"])
+keisy = str({"1":"1"})
 # print(keisy)
 
 add = { "key1": "pair3" }
 myvar = json.loads(key)
-# myvar.update(add)
+myvar.update(add)
 
 # print(json.dumps(myvar))
 
+with open('dict.json', 'r') as dict:
+    filejson = json.loads(dict.read())
+filejson.update(add)
 
-# with open('dict.json', 'r') as dict:
-#     filejson = json.loads(dict.read())
-# filejson.update(add)
 
-
-# with open('dict.json', 'w') as json_final:
-#     json_final.write(json.dumps(filejson))
+with open('dict.json', 'w') as json_final:
+    json_final.write(json.dumps(filejson))
 
 
 def unpack_the_zip():
@@ -100,7 +98,7 @@ def db_checker():
     # print(db)
 
     get_message = db.get_message_by_name("ControlCommand")
-    # print(get_message.signals)
+    print(get_message.signals)
 
     for ans in answer:
         # print('Full answer - ', ans)
@@ -112,9 +110,62 @@ def db_checker():
                     signal.minimum, signal.maximum, \
                     signal.unit, \
                     signal.receivers)
-            
-            
-unpack_the_zip()
-db_checker()
-xml_changer()
-pack_the_zip()
+
+# argparse section
+parser = argparse.ArgumentParser(description='Process some tasks.')
+parser.add_argument('-z', '--zoo', help='Print animals')
+parser.add_argument('-n', '--numerics', help='Numeric multyplier', type=float, nargs='*')
+parser.add_argument('-v', '--verbose', type=int, choices=[1,2,3], help='Enable verbose output 1, 2, 3 etc.')
+parser.add_argument('--unpack', action='store_true', help='Unpack the zip files')
+parser.add_argument('--checkdb', action='store_true', help='Check the DBC file')
+parser.add_argument('--changexml', action='store_true', help='Change the XML file')
+parser.add_argument('--pack', action='store_true', help='Pack the modified files into a zip')
+
+args = parser.parse_args()
+
+# print(args)
+
+if args.unpack:
+    unpack_the_zip()
+
+if args.checkdb:
+    db_checker()
+
+if args.changexml:
+    xml_changer()
+
+if args.pack:
+    pack_the_zip()
+
+if args.numerics:
+    result = args.numerics * 10
+    print(f'Numeric multiplier result: {result}')
+
+if args.verbose is not None:
+    match args.verbose:
+        case 1:
+            print('Verbose level 1 enabled')
+        case 2:
+            print('Verbose level 2 enabled')
+        case 3:
+            print('Verbose 3 enabled')
+        case _:
+            print('No verbose output')
+
+if args.zoo is not None:
+    match args.zoo:
+        case 'cats' | 'cat':
+            print('Meow! Meow!')
+        case 'dogs':
+            print('Woof! Woof!')
+        case 'birds':
+            print('Chirp! Chirp!')
+        case _:
+            print("That's not an animal. \nBut you are!")
+
+
+
+# unpack_the_zip()
+# db_checker()
+# xml_changer()
+# pack_the_zip()
