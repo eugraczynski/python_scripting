@@ -89,7 +89,6 @@ def xml_changer():
 
     root.append(ET.Element('Tail', attrib={'MyTail':'MyRules'}))
     root.tail = '\n\nthis is tail, hi'
-
     tree.write('./DataSetB_modified.xml')
 
 def db_checker():
