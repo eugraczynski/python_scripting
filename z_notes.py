@@ -113,7 +113,7 @@ def db_checker():
 # argparse section
 parser = argparse.ArgumentParser(description='Process some tasks.')
 parser.add_argument('-z', '--zoo', help='Print animals')
-parser.add_argument('-n', '--numerics', help='Numeric multyplier', type=float, nargs='*')
+parser.add_argument('-n', '--numerics', help='Numeric sum', type=float, nargs='*')
 parser.add_argument('-v', '--verbose', type=int, choices=[1,2,3], help='Enable verbose output 1, 2, 3 etc.')
 parser.add_argument('--unpack', action='store_true', help='Unpack the zip files')
 parser.add_argument('--checkdb', action='store_true', help='Check the DBC file')
@@ -123,6 +123,10 @@ parser.add_argument('--pack', action='store_true', help='Pack the modified files
 args = parser.parse_args()
 
 # print(args)
+
+if args.numerics is not None:
+    print(f'Numeric inputs: {args.numerics}')
+    print(sum(args.numerics))
 
 if args.unpack:
     unpack_the_zip()
@@ -135,10 +139,6 @@ if args.changexml:
 
 if args.pack:
     pack_the_zip()
-
-if args.numerics:
-    result = args.numerics * 10
-    print(f'Numeric multiplier result: {result}')
 
 if args.verbose is not None:
     match args.verbose:
