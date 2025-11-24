@@ -149,7 +149,7 @@ if args.verbose is not None:
         case 3:
             print('Verbose 3 enabled')
         case _:
-            print('No verbose output')
+            print('Wrong verbose input')
 
 if args.zoo is not None:
     match args.zoo:
