@@ -48,8 +48,6 @@ class Person:
 
 # person = Person(fake.name(), fake.address(), fake.email())
 
-# Tuple - is TWO or MORE values!
-
 person = Person(
     fake.name(), fake.name(), fake.name(),\
     address=fake.address(),\
