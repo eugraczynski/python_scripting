@@ -20,13 +20,13 @@ myvar.update(add)
 
 # print(json.dumps(myvar))
 
-with open('dict.json', 'r') as dict:
-    filejson = json.loads(dict.read())
-    filejson.update(add)
+# with open('dict.json', 'r') as dict:
+#     filejson = json.loads(dict.read())
+#     filejson.update(add)
 
 
-with open('dict.json', 'w') as json_final:
-    json_final.write(json.dumps(filejson))
+# with open('dict.json', 'w') as json_final:
+#     json_final.write(json.dumps(filejson))
 
 
 def unpack_the_zip():
