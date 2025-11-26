@@ -22,7 +22,7 @@ myvar.update(add)
 
 with open('dict.json', 'r') as dict:
     filejson = json.loads(dict.read())
-filejson.update(add)
+    filejson.update(add)
 
 
 with open('dict.json', 'w') as json_final:
@@ -31,7 +31,7 @@ with open('dict.json', 'w') as json_final:
 
 def unpack_the_zip():
 
-    zipfile_path = pathlib.Path('Tasks.zip')
+    zipfile_path = pathlib.Path('./Data_to_extract/Tasks.zip')
 
     with zipfile.ZipFile(zipfile_path, 'r') as zip_ref:
         zip_ref.extractall(pathlib.Path('extracted_tasks/'))
@@ -148,6 +148,7 @@ if args.verbose is not None:
             print('Verbose level 2 enabled')
         case 3:
             print('Verbose 3 enabled')
+        # never called because of argparse choices
         case _:
             print('Wrong verbose input')
 
@@ -164,7 +165,7 @@ if args.zoo is not None:
 
 
 
-# unpack_the_zip()
-# db_checker()
-# xml_changer()
-# pack_the_zip()
+unpack_the_zip()
+db_checker()
+xml_changer()
+pack_the_zip()
