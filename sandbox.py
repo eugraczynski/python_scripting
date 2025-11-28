@@ -64,3 +64,14 @@ print(fake.currency_code())
 # <_>
 
 
+
+print("car" in ["car", "bus", "train"])
+#  test_ in pytest
+# immutable structure
+# error handling
+print([x * 2 for x in [1, 2, 3]])
+
+# aspice
+# (Python, CAN tools, automation logs)
+
+
