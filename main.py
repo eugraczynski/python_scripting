@@ -29,6 +29,29 @@ myvar.update(add)
 #     json_final.write(json.dumps(filejson))
 
 
+# recursive nested extraction of zip-s
+
+class ZipHelper:
+    def __init__(self, path: str, mode: str = "unpack"):
+        self.path = path
+        self.mode = mode
+    
+    def get_name(self):
+        return self.path, self.mode
+    
+
+    
+#     def __enter__(self):
+#         return self
+
+#     def __exit__(self, exc_type, exc_value, traceback):
+#         return print('exit!')
+
+# with ZipHelper('swad', 'pack') as zipAlias:
+#     print(zipAlias.get_name())
+
+
+
 def unpack_the_zip():
 
     zipfile_path = pathlib.Path('./Data_to_extract/Tasks.zip')
