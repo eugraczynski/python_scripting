@@ -1,9 +1,16 @@
 from faker import Faker
 import re
-from util import calc,color, sqrt
+from util import calc, color, sqrt
 
 print(sqrt(calc.x2(4)))
 print(color)
+print(__name__)
+
+
+if __name__ == "__main__":
+        print("MAIN RUN")
+
+
 fake = Faker()
 
 
@@ -20,12 +27,12 @@ lorem = "ontrary to popular belief, " \
 
 x = re.search("[Ll]orem", lorem)
 
-if x:
-    print("Match found")
-else:
-    print("No match found")
+# if x:
+#     print("Match found")
+# else:
+#     print("No match found")
 
-print(re.findall(r"Ext\w*m.s", lorem))
+# print(re.findall(r"Ext\w*m.s", lorem))
 
 # <_>
 # 
@@ -57,24 +64,20 @@ person = Person(
     email=fake.email()
     )
 
-print(person)
-print("Person's Name:", person.get_name())
+# print(person)
+# print("Person's Name:", person.get_name())
 
 
-print(fake.address())
-print(fake.currency_code())
+# print(fake.address())
+# print(fake.currency_code())
 
 # <_>
 
-
-
-print("car" in ["car", "bus", "train"])
-#  test_ in pytest
+# print("car" in ["car", "bus", "train"])
+# test_ in pytest
 # immutable structure
 # error handling
-print([x * 2 for x in [1, 2, 3]])
+# print([x * 2 for x in [1, 2, 3]])
 
 # aspice
 # (Python, CAN tools, automation logs)
-
-
