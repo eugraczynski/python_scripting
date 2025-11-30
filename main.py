@@ -6,6 +6,7 @@ import pathlib
 import os
 import xml.etree.ElementTree as ET
 
+
 key = '{ "key": "value", "key": "value", "key": "value"}'
 
 key2 = {'keys':'val'}
@@ -36,11 +37,23 @@ class ZipHelper:
         self.path = path
         self.mode = mode
     
-    def get_name(self):
-        return self.path, self.mode
+    def __call__(self, *args, **kwds):
+        if self.mode == "unpack":
+            pass
+
+        elif self.mode == "pack":
+            zipfile_path = pathlib.Path('packed_config.zip')
+            with zipfile.ZipFile(zipfile_path, 'w') as zip_ref:
+                for dirpath, b, filenames in os.walk('extracted_tasks'):
+                    zip_ref.write(dirpath)
+                    for filename in filenames:
+                        filepath = os.path.join(dirpath, filename)
+                        zip_ref.write(filepath)
+        else:
+            print('Unknown mode')
     
 
-    
+ZipHelper('swad', 'pack')()
 #     def __enter__(self):
 #         return self
 
@@ -188,7 +201,7 @@ if args.zoo is not None:
 
 
 
-unpack_the_zip()
-db_checker()
-xml_changer()
-pack_the_zip()
+# unpack_the_zip()
+# db_checker()
+# xml_changer()
+# pack_the_zip()
