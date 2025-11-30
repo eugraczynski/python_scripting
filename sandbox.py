@@ -1,6 +1,9 @@
 from faker import Faker
 import re
+from util import calc,color, sqrt
 
+print(sqrt(calc.x2(4)))
+print(color)
 fake = Faker()
 
 
