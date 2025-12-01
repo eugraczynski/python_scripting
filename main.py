@@ -1,23 +1,22 @@
 import argparse
 import cantools
-import json
 import zipfile
 import pathlib
 import os
 import xml.etree.ElementTree as ET
 
+# import json
+# key = '{ "key": "value", "key": "value", "key": "value"}'
 
-key = '{ "key": "value", "key": "value", "key": "value"}'
+# key2 = {'keys':'val'}
+# key2['pair'] = 'ars'
 
-key2 = {'keys':'val'}
-key2['pair'] = 'ars'
+# keisy = str({"1":"1"})
+# # print(keisy)
 
-keisy = str({"1":"1"})
-# print(keisy)
-
-add = { "key1": "pair3" }
-myvar = json.loads(key)
-myvar.update(add)
+# add = { "key1": "pair3" }
+# myvar = json.loads(key)
+# myvar.update(add)
 
 # print(json.dumps(myvar))
 
@@ -39,7 +38,7 @@ class ZipHelper:
     
     def __call__(self, *args, **kwds):
         if self.mode == "unpack":
-            pass
+            unpack_the_zip()
 
         elif self.mode == "pack":
             zipfile_path = pathlib.Path('packed_config.zip')

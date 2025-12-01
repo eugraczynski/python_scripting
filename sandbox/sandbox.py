@@ -1,21 +1,23 @@
 from faker import Faker
 import re
 import sys
-# import os
+import os
 
 
 
 from pathlib import Path
 sys.path.append(str(Path(__file__).parent.parent))
 
+print(str(Path(__file__).parent.parent))
+
+# from util import calc
+# print(calc.x2(10))
 
 
-import util.calc as utils
+print(os.getcwd())
+print(sys.path)
 
-# print(os.getcwd())
-# print(sys.path)
 
-print(utils.x2(10))
 
 fake = Faker()
 
