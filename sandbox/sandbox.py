@@ -1,20 +1,25 @@
 from faker import Faker
 import re
 import sys
-# import os
+import os
 
 
 from pathlib import Path
 
+<<<<<<< HEAD
 sys.path.append(str(Path(__file__).parent.parent))
+=======
+print(str(Path(__file__).parent.parent))
+
+# from util import calc
+# print(calc.x2(10))
+>>>>>>> f3229bccb52f0a0c841cf3a81f4edf38b63a648e
 
 
-import util.calc as utils
+print(os.getcwd())
+print(sys.path)
 
-# print(os.getcwd())
-# print(sys.path)
 
-print(utils.x2(10))
 
 
 var_underscore = 123
