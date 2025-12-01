@@ -1,3 +1,5 @@
+# we can use [:] or slice()
+
 string_ = "Revert me please:)"
 
 
@@ -17,7 +19,6 @@ def method_2():
     for letter in string_:
         answer = letter + answer
     return answer
-
 
 
 def method_3():
@@ -45,3 +46,7 @@ def recursion_reverse(string_):
 
 
 print(recursion_reverse(string_))
+
+# ?>>??????D??DAW?DA?WD?
+# why
+print(string_[-4:])

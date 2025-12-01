@@ -43,12 +43,21 @@ class ZipHelper:
 
     def __call__(self, *args, **kwds):
         if self.mode == "unpack":
-            unpack_the_zip()
+            for dirpath, dirname, filenames in os.walk("./data_to_extract"):
+                for name in filenames:
+                    if name[-4:] == ".zip":
+                        # print("found")
+                        zipfile_path = pathlib.Path("./data_to_extract/" + name)
+                        # print(zipfile_path)
+                        with zipfile.ZipFile(zipfile_path, "r") as zip_ref:
+                            zip_ref.extractall(
+                                pathlib.Path(f"./extracted_tasks/{name[:-4]}")
+                            )
 
         elif self.mode == "pack":
             zipfile_path = pathlib.Path("packed_config.zip")
             with zipfile.ZipFile(zipfile_path, "w") as zip_ref:
-                for dirpath, b, filenames in os.walk("extracted_tasks"):
+                for dirpath, dirname, filenames in os.walk("./extracted_tasks"):
                     zip_ref.write(dirpath)
                     for filename in filenames:
                         filepath = os.path.join(dirpath, filename)
@@ -57,7 +66,7 @@ class ZipHelper:
             print("Unknown mode")
 
 
-ZipHelper("swad", "pack")()
+ZipHelper("swad")()
 #     def __enter__(self):
 #         return self
 
