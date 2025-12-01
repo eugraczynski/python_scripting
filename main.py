@@ -19,6 +19,12 @@ add = {"key1": "pair3"}
 myvar = json.loads(key)
 myvar.update(add)
 
+
+
+
+# a = 15
+# print("Hello! " * 2)
+
 # print(json.dumps(myvar))
 
 # with open('dict.json', 'r') as dict:
