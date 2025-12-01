@@ -19,8 +19,6 @@ import xml.etree.ElementTree as ET
 # myvar.update(add)
 
 
-
-
 # a = 15
 # print("Hello! " * 2)
 
