@@ -3,6 +3,7 @@ import cantools
 import zipfile
 import pathlib
 import os
+import re
 import xml.etree.ElementTree as ET
 
 # import json
@@ -41,18 +42,17 @@ class ZipHelper:
         self.path = path
         self.mode = mode
 
-    def __call__(self, *args, **kwds):
+    def unpack(self):
         if self.mode == "unpack":
             for dirpath, dirname, filenames in os.walk("./data_to_extract"):
                 for name in filenames:
                     if name[-4:] == ".zip":
-                        # print("found")
                         zipfile_path = pathlib.Path("./data_to_extract/" + name)
-                        # print(zipfile_path)
                         with zipfile.ZipFile(zipfile_path, "r") as zip_ref:
                             zip_ref.extractall(
                                 pathlib.Path(f"./extracted_tasks/{name[:-4]}")
                             )
+                            # ZipHelper.unpack()
 
         elif self.mode == "pack":
             zipfile_path = pathlib.Path("packed_config.zip")
@@ -67,6 +67,22 @@ class ZipHelper:
 
 
 ZipHelper("swad")()
+
+
+def extract_nested_zip(zippedFile, toFolder):
+    """Extract a zip file including any nested zip files
+    Delete the zip file(s) after extraction
+    """
+    with zipfile.ZipFile(zippedFile, "r") as zfile:
+        zfile.extractall(path=toFolder)
+    os.remove(zippedFile)
+    for root, dirs, files in os.walk(toFolder):
+        for filename in files:
+            if re.search(r"\.zip$", filename):
+                fileSpec = os.path.join(root, filename)
+                extract_nested_zip(fileSpec, root)
+
+
 #     def __enter__(self):
 #         return self
 
