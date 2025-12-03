@@ -1,4 +1,6 @@
 import argparse
+from csv import Error
+from ctypes import WinError
 import cantools
 import zipfile
 import pathlib
@@ -42,19 +44,37 @@ class ZipHelper:
         self.path = path
         self.mode = mode
 
+    def __call__(self):
+        zipfile_path = pathlib.Path("Data_to_extract/Tasks.zip")
+        with zipfile.ZipFile(zipfile_path, "r") as zip_ref:
+            zip_ref.extractall(pathlib.Path(self.path))
+            zip_ref.close()
+
     def unpack(self):
         if self.mode == "unpack":
             for dirpath, dirname, filenames in os.walk(self.path):
                 for name in filenames:
-                    if name[-4:] == ".zip":
+                    if name.endswith(".zip"):
                         zipfile_path = pathlib.Path(self.path + "/" + name)
-                        with zipfile.ZipFile(zipfile_path, "r") as zip_ref:
-                            zip_ref.extractall(pathlib.Path(self.path))
+                        try:
+                            with zipfile.ZipFile(zipfile_path, "r") as zip_ref:
+                                zip_ref.extractall(
+                                    pathlib.Path(self.path + "/" + name[:-4])
+                                )
+                        except FileNotFoundError:
+                            break
+
+                        else:
+                            pass
+
+                        finally:
                             zip_ref.close()
-                            os.remove(self.path + "/" + name)
-                            self.unpack()
-                    else:
-                        pass
+                            try:
+                                os.remove(self.path + "/" + name)
+                            except FileNotFoundError:
+                                print("no file")
+                            finally:
+                                self.unpack()
 
         elif self.mode == "pack":
             zipfile_path = pathlib.Path("packed_config.zip")
@@ -68,27 +88,21 @@ class ZipHelper:
             print("Unknown mode")
 
     def cleanup(self):
-        for dirpath, dirname, filenames in os.walk(self.path):
-            for file in filenames:
-                os.remove(file)
+        for dirpath, dirname, filenames in os.walk("extracted_tasks"):
+            for filename in filenames:
+                filepath = os.path.join(dirpath, filename)
+                os.remove(filepath)
+            for dir in dirname:
+                print(dir)
+                folderpath = dirpath + "/" + dir
+                print(folderpath)
+                os.remove(folderpath)
 
 
-unzipped = ZipHelper("extracted_tasks").unpack()
-
-
-def extract_nested_zip(zippedFile, toFolder):
-    """Extract a zip file including any nested zip files
-    Delete the zip file(s) after extraction
-    """
-    with zipfile.ZipFile(zippedFile, "r") as zfile:
-        zfile.extractall(path=toFolder)
-    os.remove(zippedFile)
-    for root, dirs, files in os.walk(toFolder):
-        for filename in files:
-            if re.search(r"\.zip$", filename):
-                fileSpec = os.path.join(root, filename)
-                extract_nested_zip(fileSpec, root)
-
+# ZipHelper("extracted_tasks").cleanup()
+# ZipHelper("extracted_tasks")()
+# ZipHelper("extracted_tasks").unpack()
+ZipHelper("extracted_tasks").cleanup()
 
 #     def __enter__(self):
 #         return self
@@ -98,23 +112,6 @@ def extract_nested_zip(zippedFile, toFolder):
 
 # with ZipHelper('swad', 'pack') as zipAlias:
 #     print(zipAlias.get_name())
-
-
-def unpack_the_zip():
-    zipfile_path = pathlib.Path("./Data_to_extract/Tasks.zip")
-
-    with zipfile.ZipFile(zipfile_path, "r") as zip_ref:
-        zip_ref.extractall(pathlib.Path("extracted_tasks/"))
-
-    zipfile_path = pathlib.Path("./extracted_tasks/Task1.zip")
-
-    with zipfile.ZipFile(zipfile_path, "r") as zip_ref:
-        zip_ref.extractall(pathlib.Path("extracted_tasks/task1"))
-
-    zipfile_path = pathlib.Path("./extracted_tasks/Task2.zip")
-
-    with zipfile.ZipFile(zipfile_path, "r") as zip_ref:
-        zip_ref.extractall(pathlib.Path("extracted_tasks/task2"))
 
 
 def pack_the_zip():
@@ -221,8 +218,8 @@ if args.numerics is not None:
     print(f"Numeric inputs: {args.numerics}")
     print(sum(args.numerics))
 
-if args.unpack:
-    unpack_the_zip()
+# if args.unpack:
+# unpack_the_zip()
 
 if args.checkdb:
     db_checker()

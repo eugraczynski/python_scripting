@@ -1,5 +1,0 @@
-argparse
-json
-zipfile
-pathlib
-db-sqlite3
