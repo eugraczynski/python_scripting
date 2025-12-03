@@ -49,4 +49,5 @@ print(recursion_reverse(string_))
 
 # ?>>??????D??DAW?DA?WD?
 # why
-print(string_[-4:])
+lsls = "0123456789"
+print(lsls[2::-2])

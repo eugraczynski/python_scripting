@@ -1,28 +1,99 @@
+from typing import Sequence
 from faker import Faker
 import re
 import sys
-import os
+# import os
 
 
 from pathlib import Path
 
-<<<<<<< HEAD
 sys.path.append(str(Path(__file__).parent.parent))
-=======
-print(str(Path(__file__).parent.parent))
-
-# from util import calc
-# print(calc.x2(10))
->>>>>>> f3229bccb52f0a0c841cf3a81f4edf38b63a648e
 
 
-print(os.getcwd())
-print(sys.path)
-
-
+# print(os.getcwd())
+# print(sys.path)
 
 
 var_underscore = 123
+
+
+# references
+a = 1
+b = 2
+a, b = b, a
+
+x = a
+print(a)
+# a = a + 1
+print(a)
+print(x)
+
+print(id(x))
+print(id(a))
+
+print(x is a)  # comparator of references
+
+n = None
+n1 = None
+print(n is n1)  # they reference to same object
+
+lst = [1, 2, 3, 4]
+print(id(lst))
+lst.append(5)
+print(lst)
+print(id(lst))
+
+
+x, y = 1, 2  # tuple unpacking
+tuple_s = 1, 2, 3
+
+(1, 2) + (3, 4)
+# returns (1,2,3,4)
+
+# # iterable == colletion == Sequence()
+s = "longstring"
+for index, values in enumerate(s):
+    print(index, values)
+
+# to stop iterating when value found,
+for x in range(10000):
+    if x == 200:
+        print("found 200")
+        break
+
+
+# while True:  # will run forever unless break
+#     print("time!")
+
+# enumerate()
+# enumerate?  - can be used in python jupiter
+
+# 1 + 2, adds two objects(python based on objects)
+# for both stored object, and merges them, creating third object and reference to it
+
+# amount of references to exact object variable
+# print(sys.getrefcount(a))
+
+
+# mutable, immutable
+
+# mutable - can be changed after creation
+# [list] { dic: val, dic2: val } sets { 1, 2, 3}
+# immutable can't be changed
+# Numbers, strings, tuples, frozenset
+
+
+# number types are:
+# int, float, complex(?)
+
+
+# transforming types
+listed_characters = list("word")
+print(listed_characters)
+# ['w', 'o', 'r', 'd']
+
+
+# random.shuffle(list_var)
 
 
 fake = Faker()

@@ -44,15 +44,17 @@ class ZipHelper:
 
     def unpack(self):
         if self.mode == "unpack":
-            for dirpath, dirname, filenames in os.walk("./data_to_extract"):
+            for dirpath, dirname, filenames in os.walk(self.path):
                 for name in filenames:
                     if name[-4:] == ".zip":
-                        zipfile_path = pathlib.Path("./data_to_extract/" + name)
+                        zipfile_path = pathlib.Path(self.path + "/" + name)
                         with zipfile.ZipFile(zipfile_path, "r") as zip_ref:
-                            zip_ref.extractall(
-                                pathlib.Path(f"./extracted_tasks/{name[:-4]}")
-                            )
-                            # ZipHelper.unpack()
+                            zip_ref.extractall(pathlib.Path(self.path))
+                            zip_ref.close()
+                            os.remove(self.path + "/" + name)
+                            self.unpack()
+                    else:
+                        pass
 
         elif self.mode == "pack":
             zipfile_path = pathlib.Path("packed_config.zip")
@@ -65,8 +67,13 @@ class ZipHelper:
         else:
             print("Unknown mode")
 
+    def cleanup(self):
+        for dirpath, dirname, filenames in os.walk(self.path):
+            for file in filenames:
+                os.remove(file)
 
-ZipHelper("swad")()
+
+unzipped = ZipHelper("extracted_tasks").unpack()
 
 
 def extract_nested_zip(zippedFile, toFolder):
@@ -126,7 +133,7 @@ def xml_changer():
     tree = ET.parse("./extracted_tasks/task1/DataSetB.xml")
     root = tree.getroot()
 
-    itered = root.iter("Signal")
+    # itered = root.iter("Signal")
     # print('DEBUG - Itered by "Signal":\n', itered)
     notitered = root.findall('.//TxMessage/Signal[@name="Temperature"]')
     # print("DEBUG - Itered by findall(//path/to/file'):\n", notitered)

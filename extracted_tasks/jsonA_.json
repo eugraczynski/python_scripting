@@ -1,0 +1,36 @@
+{
+    "name": "QNX_SignalMap",
+    "version": "2.1",
+    "metadata": {
+        "author": "System Integrator",
+        "created": "2025-10-24",
+        "platform": "QNX 7.1",
+        "description": "Mapping of ECU signals and their operational status across the vehicle network."
+    },
+    "signals": [
+        {
+            "id": 101,
+            "ecu": "SensorManager",
+            "signal_name": "WheelSpeed_FL",
+            "value": 62.4,
+            "unit": "kmh",
+            "status": "valid"
+        },
+        {
+            "id": 102,
+            "ecu": "SensorManager",
+            "signal_name": "BrakePressure",
+            "value": 3.5,
+            "unit": "bar",
+            "status": "warning"
+        },
+        {
+            "id": 103,
+            "ecu": "ActuatorUnit",
+            "signal_name": "SteeringAngle",
+            "value": -12.5,
+            "unit": "deg",
+            "status": "invalid"
+        }
+    ]
+}
