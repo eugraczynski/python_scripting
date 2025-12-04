@@ -41,7 +41,7 @@ class ZipHelper:
         elif self.mode == "pack":
             zipfile_path = pathlib.Path("packed_config.zip")
             with zipfile.ZipFile(zipfile_path, "w") as zip_ref:
-                for dirpath, dirname, filenames in os.walk("./extracted_tasks"):
+                for dirpath, dirname, filenames in os.walk(self.path):
                     zip_ref.write(dirpath)
                     for filename in filenames:
                         filepath = os.path.join(dirpath, filename)
