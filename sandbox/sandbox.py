@@ -227,3 +227,149 @@
 
 
 # print(result())
+# def methodName(a):
+#     a = str(a)
+#     i = len(a)
+#     answer = 0
+#     for n in a:
+#         answer = answer + int(n) ** i
+#     return answer == a
+
+
+# print(methodName(1634))
+
+# print(3**3.0)
+
+# list_ = [[]] * 5
+# print(list_)
+# list_[0].append(1)
+# print(list_)
+
+
+# def foo(x):
+#     f1 = lambda: x
+#     x = 20
+#     f2 = lambda: x
+#     x = 30
+#     f3 = lambda: x
+#     return f1, f2, f3
+
+
+# [f() for f in foo(10)]
+
+
+# class A:
+#     x = "a"
+
+# class B:
+#     x = "b"
+
+
+# class C:
+#     pass
+
+
+# C.__mro__ = (A, object)
+# print(C().x)
+
+
+# x, y, z = True, False, False
+# print(x or y and z)
+
+# print(["Andrew", "Chris", "Craig", "Duncan"][-1][-1])
+
+
+# class A:
+#     __attr = "A"
+
+
+# class B(A):
+#     __attr = "B"
+
+
+# print(B().__attr)
+
+
+# from encap import *
+
+# print(_A().method(), _A()._method())
+
+
+# len(x for x in range(1, 5) if x % 2)
+
+
+# class A:
+#     a = 10
+#     b = a
+#     c = [a + i for i in range(3)]
+
+
+# obj = A()
+# print(obj.a, obj.b, obj.c)
+
+
+# class A:
+#     a = 10
+#     b = a
+#     c = []
+#     for i in range(3):
+#         c.append(a + i)
+
+
+# obj = A()
+# print(obj.a, obj.b, obj.c)
+
+
+# print(0b10 + 0o10 + 0x10)
+
+# f = lambda x, y: x + y, x - y
+# f(10, 5)
+
+
+# def boo():
+#     func = lambda: x
+#     x = 5
+#     return func
+
+
+# print(boo()())
+
+# a, (b, (c,)) = [1, (2, {3: 4})]
+
+
+# x = a, (b, (c, d)) = [1, (2, {3, 4})]
+# print(x)
+
+# list_ = [1, 2, 3, 4]
+# list_[3:1] = 0
+# print(list_)
+
+
+# list_ = [1, 2, 3, 4]
+# list_[3:1] = "?"
+# print(list_)
+
+
+# lists = [[1, 2, 3], ["a", "b", "c"]]
+# labels = []
+# result = []
+
+# for list_ in lists:
+#     reversed_list = reversed(list_)
+#     if not labels:
+#         labels = ["ITEM %s" % i for i in reversed_list]
+#     result.append(list(reversed_list))
+
+# print(result)
+
+# you can append one elements of the list
+
+# x = [1, 2, 3]
+# x.append(4)
+# print(x)
+
+# but for multiple-value list append - use extend
+
+# x = [1, 2, 3]
+# x.extend([4, 5])
+# print(x)

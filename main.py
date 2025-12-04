@@ -7,6 +7,7 @@ import pathlib
 import os
 import re
 import xml.etree.ElementTree as ET
+import util.zipHelper as zipHelper
 
 # import json
 # key = '{ "key": "value", "key": "value", "key": "value"}'
@@ -39,70 +40,11 @@ import xml.etree.ElementTree as ET
 # recursive nested extraction of zip-s
 
 
-class ZipHelper:
-    def __init__(self, path: str, mode: str = "unpack"):
-        self.path = path
-        self.mode = mode
-
-    def __call__(self):
-        zipfile_path = pathlib.Path("Data_to_extract/Tasks.zip")
-        with zipfile.ZipFile(zipfile_path, "r") as zip_ref:
-            zip_ref.extractall(pathlib.Path(self.path))
-            zip_ref.close()
-
-    def unpack(self):
-        if self.mode == "unpack":
-            for dirpath, dirname, filenames in os.walk(self.path):
-                for name in filenames:
-                    if name.endswith(".zip"):
-                        zipfile_path = pathlib.Path(self.path + "/" + name)
-                        try:
-                            with zipfile.ZipFile(zipfile_path, "r") as zip_ref:
-                                zip_ref.extractall(
-                                    pathlib.Path(self.path + "/" + name[:-4])
-                                )
-                        except FileNotFoundError:
-                            break
-
-                        else:
-                            pass
-
-                        finally:
-                            zip_ref.close()
-                            try:
-                                os.remove(self.path + "/" + name)
-                            except FileNotFoundError:
-                                print("no file")
-                            finally:
-                                self.unpack()
-
-        elif self.mode == "pack":
-            zipfile_path = pathlib.Path("packed_config.zip")
-            with zipfile.ZipFile(zipfile_path, "w") as zip_ref:
-                for dirpath, dirname, filenames in os.walk("./extracted_tasks"):
-                    zip_ref.write(dirpath)
-                    for filename in filenames:
-                        filepath = os.path.join(dirpath, filename)
-                        zip_ref.write(filepath)
-        else:
-            print("Unknown mode")
-
-    def cleanup(self):
-        for dirpath, dirname, filenames in os.walk("extracted_tasks"):
-            for filename in filenames:
-                filepath = os.path.join(dirpath, filename)
-                os.remove(filepath)
-            for dir in dirname:
-                print(dir)
-                folderpath = dirpath + "/" + dir
-                print(folderpath)
-                os.remove(folderpath)
-
-
 # ZipHelper("extracted_tasks").cleanup()
-# ZipHelper("extracted_tasks")()
-# ZipHelper("extracted_tasks").unpack()
-ZipHelper("extracted_tasks").cleanup()
+zipper = zipHelper.ZipHelper("extracted_tasks")
+zipper.__call__()
+zipper.unpack()
+# zipper.cleanup()
 
 #     def __enter__(self):
 #         return self
