@@ -62,11 +62,7 @@ class ZipHelper:
                                     pathlib.Path(self.path + "/" + name[:-4])
                                 )
                         except FileNotFoundError:
-                            break
-
-                        else:
-                            pass
-
+                            print("no file")
                         finally:
                             zip_ref.close()
                             try:
