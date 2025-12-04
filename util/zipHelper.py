@@ -27,10 +27,8 @@ class ZipHelper:
                                 )
                         except FileNotFoundError:
                             break
-
                         else:
                             pass
-
                         finally:
                             zip_ref.close()
                             try:
