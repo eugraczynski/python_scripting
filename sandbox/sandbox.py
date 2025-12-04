@@ -1,16 +1,16 @@
-from typing import Sequence
-from faker import Faker
-import re
-import sys
+# from typing import Sequence
+# from faker import Faker
+# import re
+# import sys
 
 # import os
-import argparse
-import cantools
-import zipfile
-import pathlib
-import os
-import re
-import xml.etree.ElementTree as ET
+# import argparse
+# import cantools
+# import zipfile
+# import pathlib
+# import os
+# import re
+# import xml.etree.ElementTree as ET
 
 # Okay some quic notes that can help improve:
 # 1.  for practical purpose add a try block on each action
