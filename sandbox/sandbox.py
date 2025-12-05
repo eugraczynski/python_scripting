@@ -12,6 +12,21 @@
 # import re
 # import xml.etree.ElementTree as ET
 
+# Python is strongly typed language
+# you cant add 1 + '1' and expect it to work
+
+# jupyter - instal extention so you can run small chunks of code
+# just click run cell, starts with # %%
+
+
+# %%
+
+print("hi")
+
+# %%
+print("hi2")
+
+
 # Okay some quic notes that can help improve:
 # 1.  for practical purpose add a try block on each action
 # 2. It's better if you use pack and unpack in different methods or make the current one a better and clearer name, now it's a bit confusing
@@ -292,17 +307,15 @@
 # fake = Faker()
 
 
-# lorem = (
-#     "Contrary to popular belief, "
-#     "Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin "
-#     "literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor "
-#     "at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, "
-#     "from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered "
-#     'the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" '
-#     "(The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, "
-#     'very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", '
-#     "comes from a line in section 1.10.32."
-# )
+lorem = """Contrary to popular belief,
+    Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin
+    literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor
+    at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur,
+    from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered
+    the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum
+    (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, 
+    very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet.., 
+    "comes from a line in section 1.10.32."""
 
 
 # x = re.search("[Ll]orem", lorem)
@@ -552,3 +565,8 @@
 # x = [1, 2, 3]
 # x.extend([4, 5])
 # print(x)
+
+
+# print(dir("str"))
+
+# isnumeric() and isdigit()
