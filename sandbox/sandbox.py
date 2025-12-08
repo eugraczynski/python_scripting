@@ -15,6 +15,11 @@
 # Python is strongly typed language
 # you cant add 1 + '1' and expect it to work
 
+# Some variables are also built-in python functions like 'list'
+# each time we create variable with same name we override it
+# so instead of 'list', 'list_' is suggested as naming convention
+
+
 # jupyter - instal extention so you can run small chunks of code
 # just click run cell, starts with # %%
 
@@ -570,3 +575,8 @@ lorem = """Contrary to popular belief,
 # print(dir("str"))
 
 # isnumeric() and isdigit()
+
+# %%
+print(dir(__builtins__))
+
+# %%
