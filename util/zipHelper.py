@@ -32,6 +32,8 @@ class ZipHelper:
                                         # name[0 : name.rfind(".")]     name.rsplit(".", 1)[0]
                                     )
                                 )
+
+                        # fix this
                         except FileNotFoundError as e:
                             print(f"no file - message {e}")
                         finally:
