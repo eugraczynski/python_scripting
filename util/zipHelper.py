@@ -1,4 +1,5 @@
 import pathlib
+import shutil
 import zipfile
 import os
 
@@ -8,7 +9,6 @@ class ZipHelper:
         self.path = path
         self.mode = mode
 
-    def __call__(self):
         zipfile_path = pathlib.Path("Data_to_extract/Tasks.zip")
         with zipfile.ZipFile(zipfile_path, "r") as zip_ref:
             zip_ref.extractall(pathlib.Path(self.path))
@@ -18,27 +18,30 @@ class ZipHelper:
         if self.mode == "unpack":
             for dirpath, dirname, filenames in os.walk(self.path):
                 for name in filenames:
-                    if name.endswith(".zip"):
+                    if name.endswith(".zip") | name.endswith(".7z"):
                         zipfile_path = pathlib.Path(os.path.join(self.path, name))
                         try:
                             with zipfile.ZipFile(zipfile_path, "r") as zip_ref:
                                 zip_ref.extractall(
-                                    pathlib.Path(os.path.join(self.path, name[:-4]))
+                                    pathlib.Path(
+                                        os.path.join(
+                                            self.path, name[0 : name.rfind(".")]
+                                        )
+                                        # trying to fit this logic for every file extention
+                                        # name[0 : name.rfind(".")], name.rsplit(".", 1)[0]
+                                    )
                                 )
-                        except FileNotFoundError:
-                            break
-                        else:
-                            pass
+                        except FileNotFoundError as e:
+                            print(f"no file - message {e}")
                         finally:
-                            zip_ref.close()
                             try:
                                 os.remove(os.path.join(self.path, name))
-                            except FileNotFoundError:
-                                print("no file")
-                            finally:
+                            except FileNotFoundError as e:
+                                print(f"no file - message {e}")
                                 self.unpack()
 
-        elif self.mode == "pack":
+    def pack_zip(self):
+        if self.mode == "pack":
             zipfile_path = pathlib.Path("packed_config.zip")
             with zipfile.ZipFile(zipfile_path, "w") as zip_ref:
                 for dirpath, dirname, filenames in os.walk(self.path):
@@ -46,17 +49,16 @@ class ZipHelper:
                     for filename in filenames:
                         filepath = os.path.join(dirpath, filename)
                         zip_ref.write(filepath)
-        else:
-            print("Unknown mode")
 
     def cleanup(self):
-        try:
-            for dirpath, dirname, filenames in os.walk(self.path):
-                for filename in filenames:
-                    filepath = os.path.join(dirpath, filename)
-                    os.remove(filepath)
-        finally:
-            for dirpath, dirname, filenames in os.walk(self.path):
-                for dir in dirname:
-                    folderpath = os.path.join(self.path, dir)
-                    os.rmdir(folderpath)
+        shutil.rmtree(self.path)
+        # try:
+        #     for dirpath, dirname, filenames in os.walk(self.path):
+        #         for filename in filenames:
+        #             filepath = os.path.join(dirpath, filename)
+        #             os.remove(filepath)
+        # finally:
+        #     for dirpath, dirname, filenames in os.walk(self.path):
+        #         for dir in dirname:
+        #             folderpath = os.path.join(self.path, dir)
+        #             os.rmdir(folderpath)

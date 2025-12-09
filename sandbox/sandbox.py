@@ -580,3 +580,42 @@ lorem = """Contrary to popular belief,
 print(dir(__builtins__))
 
 # %%
+len("\n")  # length is 1
+
+# %%
+len(r"\n")  # length is two
+
+# %%
+
+list_ = [None, 1, 2, 3]
+# list_.__len__()
+list_[-1]
+# print(list_.copy())
+# %%
+len([1, 2, 3, *range(100)])
+
+# result is 103 (?)
+
+# appending to the array / list is faster then pre-pending at the beginning
+# for python adding at the end is easier then before
+# %%
+
+a = [1, 2, 3, 4, 5, 6]
+a[-3:-1]
+# template is [from:to]
+# %%
+id(list_)
+# %%
+list_.append(1)
+id(list_)
+
+# %%
+list_.count(1)
+# %%
+1 in list_
+
+# %%
+
+print(f"{id(list_)} shallow: {id(list_.copy())} deep: {id(list_.__deepcopy__())} ")
+
+# %%
