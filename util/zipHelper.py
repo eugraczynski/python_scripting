@@ -28,7 +28,8 @@ class ZipHelper:
                                             self.path, name[0 : name.rfind(".")]
                                         )
                                         # trying to fit this logic for every file extention
-                                        # name[0 : name.rfind(".")], name.rsplit(".", 1)[0]
+                                        # candidates are:
+                                        # name[0 : name.rfind(".")]     name.rsplit(".", 1)[0]
                                     )
                                 )
                         except FileNotFoundError as e:
