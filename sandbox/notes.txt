@@ -1,0 +1,17 @@
+1. The recursive call of the unpack, might call it self multiple times and could cuase a Stack overflow error ;) - it's better if the recursion is done with a helper function, extracts all files and only restarts if it find any zips.
+2. The path atm is hardcoded (Data_to_extract..) make if flexible but passing as argument
+3. The current cleanup might fail - because os.walk walks top-down, meaning it encounters the parent directory before its child directories. check out: shutil.rmtree() - this is single line to remove a dir and all it's content
+4. I still think you should separate the upback and pack logic and have it be based on self.mode as the start of it is redundant and makes a double check with if statement when elf.mode should already handle it
+5. in error handling such as 
+except FileNotFoundError:
+                                print("no file")
+you should write as following so that when logging we know what the message is too
+except FileNotFoundError as e:
+                                print(f"no file - message {e}")
+
+1. The try blocks are mostly fine, but the use of so many finally blocks is creating bugs and is unnecessary, see above on #3 and #1
+2. This is ok, the call function cna be used if the class is used as function, and for exercise is OK but you should always remember to think "is this needed"
+4. What do you mean here?
+6. See #3 above
+
+7.  In you pack, make it more dynamic so it can use the any and pack into a zip, also add option to what type, .zip, .7z, .tar etc

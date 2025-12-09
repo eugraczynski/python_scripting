@@ -27,7 +27,7 @@ class ZipHelper:
     def unpack(self):
         for dirpath, dirname, filenames in os.walk(self.path):
             for name in filenames:
-                if name.endswith(".zip") | name.endswith(".7z"):
+                if name.endswith(".zip") | name.endswith(".7z") | name.endswith(".tar"):
                     zipfile_path = pathlib.Path(os.path.join(self.path, name))
                     try:
                         with zipfile.ZipFile(zipfile_path, "r") as zip_ref:
@@ -39,8 +39,6 @@ class ZipHelper:
                                     # name[0 : name.rfind(".")]     name.rsplit(".", 1)[0]
                                 )
                             )
-
-                    # fix this
                     except FileNotFoundError as e:
                         print(f"no file - message {e}")
                         try:

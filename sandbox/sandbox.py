@@ -24,25 +24,6 @@
 # just click run cell, starts with # %%
 
 
-# %%
-
-print("hi")
-
-# %%
-print("hi2")
-
-
-# Okay some quic notes that can help improve:
-# 1.  for practical purpose add a try block on each action
-# 2. It's better if you use pack and unpack in different methods or make the current one a better and clearer name, now it's a bit confusing
-# 3. when trying to find a end/start of a string it's better to use endswith()/startwith() this way if the string have some issue on the index it might cause a issue, also better readability.
-# 4. The currently method will only work if we give the directory straight, for eg: /mypath/files/myfile.zip will not work, but /mypath/files/ will work it is good idea to use os.path to check, for eg with os.path.isfile if it is the file then process to make the extraction/packing
-# 5. right now if you nested zip file has the same names as the file in main it will replace them, for eg lets say you have a zip1 inside it there are 2 files, A.txt and zip2, inside zip2 there is also a A.txt so in this case it will replace the zip1 file. My suggestion would be to unzip into folders (same paths as in root zip) and clean up once task is done, or add a pre- or suffix
-# 6. your cleanup will fail since you're sending the file name and not the file path, use os.path.join to add name with the dirpath
-# 7.  In you pack, make it more dynamic so it can use the any and pack into a zip, also add option to what type, .zip, .7z, .tar etc
-# 8. Move the class into different file to import it, and start a new Main
-
-
 # import json
 # key = '{ "key": "value", "key": "value", "key": "value"}'
 
