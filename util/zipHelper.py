@@ -4,8 +4,9 @@ import zipfile
 import os
 
 
+# make 'mode' a parameter type
 class ZipHelper:
-    def __init__(self, path: str, mode: str = "unpack"):
+    def __init__(self, path: str, source: str, mode: str = "unpack"):
         self.path = path
         self.mode = mode
 
@@ -14,54 +15,48 @@ class ZipHelper:
             zip_ref.extractall(pathlib.Path(self.path))
             zip_ref.close()
 
-    def unpack(self):
         if self.mode == "unpack":
-            for dirpath, dirname, filenames in os.walk(self.path):
-                for name in filenames:
-                    if name.endswith(".zip") | name.endswith(".7z"):
-                        zipfile_path = pathlib.Path(os.path.join(self.path, name))
-                        try:
-                            with zipfile.ZipFile(zipfile_path, "r") as zip_ref:
-                                zip_ref.extractall(
-                                    pathlib.Path(
-                                        os.path.join(
-                                            self.path, name[0 : name.rfind(".")]
-                                        )
-                                        # trying to fit this logic for every file extention
-                                        # candidates are:
-                                        # name[0 : name.rfind(".")]     name.rsplit(".", 1)[0]
-                                    )
-                                )
+            self.unpack()
 
-                        # fix this
+        elif self.mode == "pack":
+            self.pack()
+
+        elif self.mode == "cleanup":
+            self.cleanup()
+
+    def unpack(self):
+        for dirpath, dirname, filenames in os.walk(self.path):
+            for name in filenames:
+                if name.endswith(".zip") | name.endswith(".7z"):
+                    zipfile_path = pathlib.Path(os.path.join(self.path, name))
+                    try:
+                        with zipfile.ZipFile(zipfile_path, "r") as zip_ref:
+                            zip_ref.extractall(
+                                pathlib.Path(
+                                    os.path.join(self.path, name[0 : name.rfind(".")])
+                                    # trying to fit this logic for every file extention
+                                    # candidates are:
+                                    # name[0 : name.rfind(".")]     name.rsplit(".", 1)[0]
+                                )
+                            )
+
+                    # fix this
+                    except FileNotFoundError as e:
+                        print(f"no file - message {e}")
+                        try:
+                            os.remove(os.path.join(self.path, name))
                         except FileNotFoundError as e:
                             print(f"no file - message {e}")
-                        finally:
-                            try:
-                                os.remove(os.path.join(self.path, name))
-                            except FileNotFoundError as e:
-                                print(f"no file - message {e}")
-                                self.unpack()
+                            self.unpack()
 
-    def pack_zip(self):
-        if self.mode == "pack":
-            zipfile_path = pathlib.Path("packed_config.zip")
-            with zipfile.ZipFile(zipfile_path, "w") as zip_ref:
-                for dirpath, dirname, filenames in os.walk(self.path):
-                    zip_ref.write(dirpath)
-                    for filename in filenames:
-                        filepath = os.path.join(dirpath, filename)
-                        zip_ref.write(filepath)
+    def pack(self):
+        zipfile_path = pathlib.Path("packed_config.zip")
+        with zipfile.ZipFile(zipfile_path, "w") as zip_ref:
+            for dirpath, dirname, filenames in os.walk(self.path):
+                zip_ref.write(dirpath)
+                for filename in filenames:
+                    filepath = os.path.join(dirpath, filename)
+                    zip_ref.write(filepath)
 
     def cleanup(self):
         shutil.rmtree(self.path)
-        # try:
-        #     for dirpath, dirname, filenames in os.walk(self.path):
-        #         for filename in filenames:
-        #             filepath = os.path.join(dirpath, filename)
-        #             os.remove(filepath)
-        # finally:
-        #     for dirpath, dirname, filenames in os.walk(self.path):
-        #         for dir in dirname:
-        #             folderpath = os.path.join(self.path, dir)
-        #             os.rmdir(folderpath)

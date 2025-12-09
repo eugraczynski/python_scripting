@@ -80,6 +80,16 @@ print("hi2")
 # with ZipHelper('swad', 'pack') as zipAlias:
 #     print(zipAlias.get_name())
 
+# try:
+#     for dirpath, dirname, filenames in os.walk(self.path):
+#         for filename in filenames:
+#             filepath = os.path.join(dirpath, filename)
+#             os.remove(filepath)
+# finally:
+#     for dirpath, dirname, filenames in os.walk(self.path):
+#         for dir in dirname:
+#             folderpath = os.path.join(self.path, dir)
+#             os.rmdir(folderpath)
 
 # def xml_changer():
 #     tree = ET.parse("./extracted_tasks/task1/DataSetB.xml")
