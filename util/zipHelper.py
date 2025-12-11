@@ -49,6 +49,7 @@ class ZipHelper:
                             )
                     except FileNotFoundError as e:
                         print(f"no file - message {e}")
+                    finally:
                         try:
                             os.remove(os.path.join(self.path, name))
                         except FileNotFoundError as e:
