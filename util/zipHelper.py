@@ -7,10 +7,16 @@ import os
 # make 'mode' a parameter type
 class ZipHelper:
     def __init__(
-        self, path: str, source: str = "Data_to_extract/Tasks.zip", mode: str = "unpack"
+        self,
+        path: str,
+        mode: str = "unpack",
+        source: str = "Data_to_extract/Tasks.zip",
+        destination: str = "packed_config.zip",
     ):
         self.path = path
         self.mode = mode
+        self.source = source
+        self.destination = destination
 
         zipfile_path = pathlib.Path(source)
         with zipfile.ZipFile(zipfile_path, "r") as zip_ref:
@@ -50,7 +56,7 @@ class ZipHelper:
                             self.unpack()
 
     def pack(self):
-        zipfile_path = pathlib.Path("packed_config.zip")
+        zipfile_path = pathlib.Path(self.destination)
         with zipfile.ZipFile(zipfile_path, "w") as zip_ref:
             for dirpath, dirname, filenames in os.walk(self.path):
                 zip_ref.write(dirpath)
