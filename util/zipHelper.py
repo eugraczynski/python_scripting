@@ -6,11 +6,13 @@ import os
 
 # make 'mode' a parameter type
 class ZipHelper:
-    def __init__(self, path: str, source: str, mode: str = "unpack"):
+    def __init__(
+        self, path: str, source: str = "Data_to_extract/Tasks.zip", mode: str = "unpack"
+    ):
         self.path = path
         self.mode = mode
 
-        zipfile_path = pathlib.Path("Data_to_extract/Tasks.zip")
+        zipfile_path = pathlib.Path(source)
         with zipfile.ZipFile(zipfile_path, "r") as zip_ref:
             zip_ref.extractall(pathlib.Path(self.path))
             zip_ref.close()
