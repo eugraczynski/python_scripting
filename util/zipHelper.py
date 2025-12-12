@@ -33,9 +33,10 @@ class ZipHelper:
             self.cleanup()
 
     def unpack(self):
+        extentions = [".zip", ".7z", "tar"]
         for dirpath, dirname, filenames in os.walk(self.path):
             for name in filenames:
-                if name.endswith(".zip") | name.endswith(".7z") | name.endswith(".tar"):
+                if name.endswith(tuple(extentions)):
                     zipfile_path = pathlib.Path(os.path.join(self.path, name))
                     try:
                         with zipfile.ZipFile(zipfile_path, "r") as zip_ref:
