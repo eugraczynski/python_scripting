@@ -98,3 +98,19 @@ def test_me(x=333, y=7553):
     return res
 
 print(test_me())
+
+test_strings = ["kawabunga", "metro2013", "moon", "orange"]
+
+# def shwalengthimeter(test_strings):
+#     ans = []
+#     vowels = "aeiouAEIOU"
+#     for string in test_strings:
+#         ans.append(f"shwa{string[2:]} {len(string)}") if string[1] in vowels else ans.append(f"shwa{string[1:]} {len(string)}")
+#     return ans
+
+def shwalengthimeter(test_strings):
+   return [f"shwa{string[2:]} {len(string)}" if string[1] in "aeiou" else f"shwa{string[1:]} {len(string)}" for string in test_strings]
+
+print(shwalengthimeter(test_strings))
+
+
