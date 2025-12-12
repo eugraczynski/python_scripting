@@ -607,6 +607,12 @@ list_.count(1)
 
 # %%
 
-print(f"{id(list_)} shallow: {id(list_.copy())} deep: {id(list_.__deepcopy__())} ")
+# print(f"{id(list_)} shallow: {id(list_.copy())} deep: {id(list_.__deepcopy__())} ")
 
+# %%
+# produces empty list
+x = list()
+
+# %%
+x = bool()
 # %%
