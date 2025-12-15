@@ -1,6 +1,26 @@
-import util.zipHelper as zipHelper
+import argparse
+import util.zipHelper as zipModule
 
 
-zipper = zipHelper.ZipHelper("extracted_tasks", "dummysource")
-zipper.unpack()
-# zipper.cleanup()
+# argparse section
+parser = argparse.ArgumentParser(description="Process some tasks.")
+parser.add_argument(
+    "-m",
+    "--mode",
+    action="store",
+    type=str,
+    help="Mode",
+)
+parser.add_argument("-p", "--path", action="store", type=str, help="Path to zip")
+args = parser.parse_args()
+
+args_set = set()
+if args.path is not None:
+    args_set.add(args.path)
+if args.mode is not None:
+    args_set.add(args.mode)
+
+
+zipper = zipModule.ZipHelper("".join(args_set))
+
+print(args_set)

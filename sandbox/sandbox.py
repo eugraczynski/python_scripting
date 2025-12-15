@@ -4,7 +4,7 @@
 
 
 # import os
-# import argparse
+import argparse
 # import cantools
 # import zipfile
 # import pathlib
@@ -138,34 +138,31 @@
 #             )
 
 
-# # argparse section
-# parser = argparse.ArgumentParser(description="Process some tasks.")
-# parser.add_argument("-z", "--zoo", help="Print animals")
-# parser.add_argument("-n", "--numerics", help="Numeric sum", type=float, nargs="*")
-# parser.add_argument(
-#     "-v",
-#     "--verbose",
-#     type=int,
-#     choices=[1, 2, 3],
-#     help="Enable verbose output 1, 2, 3 etc.",
-# )
-# parser.add_argument("--unpack", action="store_true", help="Unpack the zip files")
-# parser.add_argument("--checkdb", action="store_true", help="Check the DBC file")
-# parser.add_argument("--changexml", action="store_true", help="Change the XML file")
-# parser.add_argument(
-#     "--pack", action="store_true", help="Pack the modified files into a zip"
-# )
+# argparse section
+parser = argparse.ArgumentParser(description="Process some tasks.")
+parser.add_argument("-z", "--zoo", help="Print animals")
+parser.add_argument("-n", "--numerics", help="Numeric sum", type=float, nargs="*")
+parser.add_argument(
+    "-v",
+    "--verbose",
+    type=int,
+    choices=[1, 2, 3],
+    help="Enable verbose output 1, 2, 3 etc.",
+)
+parser.add_argument("--unpack", action="store_true", help="Unpack the zip files")
+parser.add_argument("--checkdb", action="store_true", help="Check the DBC file")
+parser.add_argument("--changexml", action="store_true", help="Change the XML file")
+parser.add_argument(
+    "--pack", action="store_true", help="Pack the modified files into a zip"
+)
 
-# args = parser.parse_args()
+args = parser.parse_args()
 
 # # print(args)
 
 # if args.numerics is not None:
 #     print(f"Numeric inputs: {args.numerics}")
 #     print(sum(args.numerics))
-
-# # if args.unpack:
-# # unpack_the_zip()
 
 # if args.checkdb:
 #     db_checker()
@@ -649,5 +646,18 @@ options = {"case1": "1", "case2": "2", "case3": "3"}
 x = "case2"
 if x in options:
     print(x)
+
+# %%
+options = {"case1": "1", "case2": "2", "case3": "3"}
+# %timeit 9999999 in options
+
+# SET() are very fast
+
+# {<CONTRACT> : {INIT: 4, COMPLETED: 2}}
+result = {}
+for row in options:
+    key = (row["name"], row["contract"])
+    result[key] = result.setdefault(key, 0) + row["qty"]
+# %%
 
 # %%

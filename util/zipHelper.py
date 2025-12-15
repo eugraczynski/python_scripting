@@ -4,7 +4,6 @@ import zipfile
 import os
 
 
-# make 'mode' a parameter type
 class ZipHelper:
     def __init__(
         self,
@@ -23,14 +22,13 @@ class ZipHelper:
             zip_ref.extractall(pathlib.Path(self.path))
             zip_ref.close()
 
-        if self.mode == "unpack":
-            self.unpack()
-
-        elif self.mode == "pack":
-            self.pack()
-
-        elif self.mode == "cleanup":
-            self.cleanup()
+        match self.mode:
+            case "unpack":
+                self.unpack()
+            case "pack":
+                self.pack()
+            case "cleanup":
+                self.cleanup()
 
     def unpack(self):
         extentions = [".zip", ".7z", "tar"]

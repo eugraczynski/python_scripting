@@ -1,6 +1,16 @@
 def z1_function():
-    return "This is z1 function"
+    print("This is z1 function")
+
+
+z1_function()
+
+
+x = "x from z1"
+
+
+def z2_outscoped():
+    print(x)
+
 
 if __name__ == "__main__":
     print("Z1 RUN")
-
