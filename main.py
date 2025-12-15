@@ -20,8 +20,9 @@ if args.path is not None:
 if args.mode is not None:
     args_set.add(args.mode)
 
-print(r"\,".join(args_set))
-
+print(r",".join(args_set))
+a, b = args_set
+print(a, b)
 zipper = zipModule.ZipHelper()
 
 print(args_set)

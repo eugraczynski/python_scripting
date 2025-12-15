@@ -64,38 +64,22 @@ lsls = "0123456789"
 
 # python thinks in UNICODE, so it can use any language or emodzi
 
-# but you can do "abc" * 
+# but you can do "abc" *
 # abcabc
 
 # spidersripts
 
-# .decode .encode 
+# .decode .encode
 # for network package handling
-
-
-tests = [([1,2,3,4,5], [2,3,4,5]), ([5,4,1,3], [5,4,3]), ([1,2,1], [2,1])]
-
-def remove_smallest(list_):
-    newlist = list_.copy()
-    newlist.remove(min(list_))
-    return newlist
-
-def loop():
-    for test in tests:
-        print(test[0], test[1])    
-        result = remove_smallest(test[0])
-        assert result == test[1], "Wrong :("
-        assert result is not test[0], "You can't change original list"
-
-loop()
 
 
 def test_me(x=333, y=7553):
     res = []
-    for i in range(x,y+1):
-        if i % 7 == 0  and i % 13 == 0 and i % 5 != 0:
+    for i in range(x, y + 1):
+        if i % 7 == 0 and i % 13 == 0 and i % 5 != 0:
             res.append(i)
     return res
+
 
 print(test_me())
 
@@ -108,9 +92,39 @@ test_strings = ["kawabunga", "metro2013", "moon", "orange"]
 #         ans.append(f"shwa{string[2:]} {len(string)}") if string[1] in vowels else ans.append(f"shwa{string[1:]} {len(string)}")
 #     return ans
 
+
 def shwalengthimeter(test_strings):
-   return [f"shwa{string[2:]} {len(string)}" if string[1] in "aeiou" else f"shwa{string[1:]} {len(string)}" for string in test_strings]
+    return [
+        f"shwa{string[2:]} {len(string)}"
+        if string[1] in "aeiou"
+        else f"shwa{string[1:]} {len(string)}"
+        for string in test_strings
+    ]
+
 
 print(shwalengthimeter(test_strings))
 
 
+tests = [
+    (3, [1, 2, 3, 1, 2, 4], [3, 2, 4]),
+    (2, [5, 4, 1, 3], [5, 4]),
+    (4, [1, 2, 1], []),
+]
+
+
+def remove_smallest(num, list_):
+    newlist = list_.copy()
+    if num >= len(list_):
+        return []
+    else:
+        for _ in range(num):
+            newlist.remove(min(newlist))
+    print(newlist)
+    return newlist
+
+
+for test in tests:
+    number, original, expected = test
+    actual = remove_smallest(number, original)
+    assert actual == expected, "Wrong :("
+    assert actual is not original, "You can't change original list"
