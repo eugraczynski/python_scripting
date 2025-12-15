@@ -1,7 +1,7 @@
 # from typing import Sequence
 # from faker import Faker
 # import re
-# import sys
+
 
 # import os
 # import argparse
@@ -301,7 +301,6 @@
 
 
 # fake = Faker()
-
 
 lorem = """Contrary to popular belief,
     Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin
@@ -607,6 +606,48 @@ list_.count(1)
 
 # %%
 
-print(f"{id(list_)} shallow: {id(list_.copy())} deep: {id(list_.__deepcopy__())} ")
+# print(f"{id(list_)} shallow: {id(list_.copy())} deep: {id(list_.__deepcopy__())} ")
+
+# %%
+# produces empty list
+x = list()
+
+# %%
+x = bool()
+# %%
+
+# set is a collection of unique elements
+s = set()
+# %%
+s = {4, 2, 3, None}
+print(s)
+# %%
+s.add(1)
+print(s)
+# %%
+s.add(1)
+print(s)
+# %%
+s.update({0, 1, 1})
+print(s)
+# %%
+from logging.config import valid_ident
+import sys
+
+print(sys.getsizeof(s))
+# %%
+d1 = {"a": "1"}
+# %%
+d2 = {"b": "2"}
+# %%
+d1.update(d2)
+print(d1)
+# %%
+
+# if else logic can be done via dictionaries
+options = {"case1": "1", "case2": "2", "case3": "3"}
+x = "case2"
+if x in options:
+    print(x)
 
 # %%
