@@ -93,7 +93,7 @@ loop()
 def test_me(x=333, y=7553):
     res = []
     for i in range(x,y+1):
-        if (i % 7 == 0 ) and ( i % 13 == 0 ) and ( i % 5 != 0 ):
+        if i % 7 == 0  and i % 13 == 0 and i % 5 != 0:
             res.append(i)
     return res
 
