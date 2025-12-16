@@ -654,10 +654,22 @@ options = {"case1": "1", "case2": "2", "case3": "3"}
 # SET() are very fast
 
 # {<CONTRACT> : {INIT: 4, COMPLETED: 2}}
-result = {}
-for row in options:
-    key = (row["name"], row["contract"])
-    result[key] = result.setdefault(key, 0) + row["qty"]
+# result = {}
+# for row in options:
+#     key = (row["name"], row["contract"])
+#     result[key] = result.setdefault(key, 0) + row["qty"]
 # %%
 
+# %%
+for i in range(1, 11):
+    print(i)
+    for t in range(1, 11):
+        print(t)
+# %%
+math_ = []
+for i in range(1,11):
+    math_.append(i)
+    for j in range(1,11):
+        math_.append(j*i)
+print(math_)
 # %%
