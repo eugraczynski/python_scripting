@@ -38,5 +38,12 @@ args = parser.parse_args()
 # print(args_set)
 
 
-
 zipper = zipModule.ZipHelper(args.path, args.mode, args.source, args.destination)
+
+"""
+1. remake main with the arg to have at least 2 following args, mode and path to unzip (we will add more once we have more functionalities) 
+
+2. create the dbc class, add a new unit signal with different byte size etc. You might need to do some research on dbc files but they are relative straightforward
+
+3. As I remember you already had a XML function where we can add/edit a signal, make it a module.
+"""
