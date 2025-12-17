@@ -668,12 +668,20 @@ for i in range(1, 11):
     for t in range(1, 11):
         print(t)
 # %%
-math_ = []
-for i in range(1, 11):
-    math_.append(i)
-    for j in range(1, 11):
-        math_.append(j * i)
-print(math_)
+
+for x in range (1, 11):
+    for y in range (1, 11):
+        print (x*y)
+    print()
+
+# %%
+def draw_table():
+    result = ''
+    for x in range (1, 11):
+        for y in range (1, 11):
+            result += '{:4}'.format(x*y)
+    return result
+print(draw_table())
 # %%
 list_ = [[[[1, 4, 5], [[6, 9], [[[8, 1], 7], 3], 2], 7], 5, 2], 9, [1, 2]]
 
