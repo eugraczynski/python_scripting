@@ -5,6 +5,7 @@
 
 # import os
 import argparse
+from typing import Callable
 # import cantools
 # import zipfile
 # import pathlib
@@ -659,7 +660,8 @@ options = {"case1": "1", "case2": "2", "case3": "3"}
 #     key = (row["name"], row["contract"])
 #     result[key] = result.setdefault(key, 0) + row["qty"]
 # %%
-
+print(type({"a": 1}))
+# int("abc")
 # %%
 for i in range(1, 11):
     print(i)
@@ -667,9 +669,86 @@ for i in range(1, 11):
         print(t)
 # %%
 math_ = []
-for i in range(1,11):
+for i in range(1, 11):
     math_.append(i)
-    for j in range(1,11):
-        math_.append(j*i)
+    for j in range(1, 11):
+        math_.append(j * i)
 print(math_)
+# %%
+list_ = [[[[1, 4, 5], [[6, 9], [[[8, 1], 7], 3], 2], 7], 5, 2], 9, [1, 2]]
+
+
+answer = []
+
+
+def func(item):
+    print(item)
+    if isinstance(item, list):
+        return answer.append(item)
+
+
+map(func, list_)
+print(answer)
+
+# %%
+
+
+def rec_func(nested_list):
+    answer = 0
+    for item in nested_list:
+        if isinstance(item, list):
+            answer += rec_func(item)
+        else:
+            answer += item
+    return answer
+
+
+print(rec_func(list_))
+
+
+def nested_sum(nested_list):
+    return sum(nested_sum(x) if isinstance(x, list) else x for x in nested_list)
+
+
+print(nested_sum(list_))
+
+
+# %%
+def find_lambda(list_):
+    # y = list(map(lambda x: list_.remove(x) if callable(x) else x), list_)
+    for item in list_:
+        if callable(item):
+            if item is not list in list_:
+                item(item)
+            else:
+                list_.remove(item)
+            # for j in list_:
+            #     list_[list_.index(j)] = func(j)
+    return list(map(lambda x: func(list_[list_.index(x)]), list_))
+
+
+print(find_lambda([lambda a: a + 2, 9, 3, 1, 0]))  # [11, 5, 3, 2]
+print(find_lambda([9, 2, 3, lambda a: a / 2.0, 1, 0]))  # [4.5, 1, 1.5, 0.5, 0.0]
+
+# %%
+
+
+# for 2+ lambdas in lists
+def find_lambda(list_):
+    lambda_list = []
+    for item in list_:
+        if callable(item):
+            lambda_list.append(item)
+            list_.remove(item)
+    for func in lambda_list:
+        for item in list_:
+            list_[list_.index(item)] = func(item)
+    return list_
+
+
+print(find_lambda([lambda a: a + 2, 9, 3, 1, 0, lambda a: a + 2]))  # [11, 5, 3, 2]
+print(find_lambda([9, 2, 3, lambda a: a / 2.0, 1, 0]))  # [4.5, 1, 1.5, 0.5, 0.0]
+
+# %%
+print([x * 2 for x in [1, 2, 3]])
 # %%
