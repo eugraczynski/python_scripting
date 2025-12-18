@@ -723,26 +723,30 @@ print(nested_sum(list_))
 
 # %%
 def find_lambda(list_):
-    # y = list(map(lambda x: list_.remove(x) if callable(x) else x), list_)
-    for item in list_:
-        if callable(item):
-            if item is not list in list_:
-                item(item)
-            else:
-                list_.remove(item)
-            # for j in list_:
-            #     list_[list_.index(j)] = func(j)
-    return list(map(lambda x: func(list_[list_.index(x)]), list_))
+    newlist = []
+    lambda_answer = None
+    def lamb(i):
+        lambda_answer = i
+    map(lambda item: newlist.append(item) if not callable(item) else list_.remove(item) & lamb(item), list_)
+
+    
+    # for item in list_:
+    #     if callable(item):
+    #         list_.remove(item)
+    #         for j in list_:
+    #             answer.append(item(j))
+    return [lambda_answer(item) for item in newlist]
 
 
 print(find_lambda([lambda a: a + 2, 9, 3, 1, 0]))  # [11, 5, 3, 2]
 print(find_lambda([9, 2, 3, lambda a: a / 2.0, 1, 0]))  # [4.5, 1, 1.5, 0.5, 0.0]
 
-# %%
-
-
+# map(lambda x: func(list_[list_.index(x)]), list_)
+# y = list(map(lambda x: list_.remove(x) if callable(x) else x), list_)
+#%%
 # for 2+ lambdas in lists
 def find_lambda(list_):
+    answer = []
     lambda_list = []
     for item in list_:
         if callable(item):
@@ -750,8 +754,8 @@ def find_lambda(list_):
             list_.remove(item)
     for func in lambda_list:
         for item in list_:
-            list_[list_.index(item)] = func(item)
-    return list_
+            answer.append(func(item))
+    return answer
 
 
 print(find_lambda([lambda a: a + 2, 9, 3, 1, 0, lambda a: a + 2]))  # [11, 5, 3, 2]
