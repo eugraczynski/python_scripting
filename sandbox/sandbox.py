@@ -662,25 +662,33 @@ options = {"case1": "1", "case2": "2", "case3": "3"}
 # %%
 print(type({"a": 1}))
 # int("abc")
-# %%
-for i in range(1, 11):
-    print(i)
-    for t in range(1, 11):
-        print(t)
+
 # %%
 
 for x in range (1, 11):
     for y in range (1, 11):
-        print (x*y)
+        print ('{:3}'.format(x*y), end=' ')
     print()
+
+# %%
+def draw_table():
+    for x in range (1, 11):
+        for y in range (1, 11):
+            result += '{:4}'.format(x*y)
+    return result
+
+print(draw_table())
 
 # %%
 def draw_table():
     result = ''
     for x in range (1, 11):
+        line = '\n'
         for y in range (1, 11):
-            result += '{:4}'.format(x*y)
-    return result
+            line += f'{x*y} '
+        result += line
+    return result.format()
+
 print(draw_table())
 # %%
 list_ = [[[[1, 4, 5], [[6, 9], [[[8, 1], 7], 3], 2], 7], 5, 2], 9, [1, 2]]
@@ -723,19 +731,13 @@ print(nested_sum(list_))
 
 # %%
 def find_lambda(list_):
-    newlist = []
-    lambda_answer = None
-    def lamb(i):
-        lambda_answer = i
-    map(lambda item: newlist.append(item) if not callable(item) else list_.remove(item) & lamb(item), list_)
-
-    
-    # for item in list_:
-    #     if callable(item):
-    #         list_.remove(item)
-    #         for j in list_:
-    #             answer.append(item(j))
-    return [lambda_answer(item) for item in newlist]
+    answer = []
+    for item in list_:
+        if callable(item):
+            list_.remove(item)
+            for j in list_:
+                answer.append(item(j))
+    return answer
 
 
 print(find_lambda([lambda a: a + 2, 9, 3, 1, 0]))  # [11, 5, 3, 2]
