@@ -735,9 +735,10 @@ def find_lambda(list_):
 print(find_lambda([lambda a: a + 2, 9, 3, 1, 0]))  # [11, 5, 3, 2]
 print(find_lambda([9, 2, 3, lambda a: a / 2.0, 1, 0]))  # [4.5, 1, 1.5, 0.5, 0.0]
 
+
 # map(lambda x: func(list_[list_.index(x)]), list_)
 # y = list(map(lambda x: list_.remove(x) if callable(x) else x), list_)
-#%%
+# %%
 # for 2+ lambdas in lists
 def find_lambda(list_):
     answer = []
