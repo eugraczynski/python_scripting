@@ -5,7 +5,7 @@
 
 # import os
 import argparse
-from typing import Callable
+import re
 # import cantools
 # import zipfile
 # import pathlib
@@ -615,7 +615,7 @@ x = bool()
 # %%
 
 # set is a collection of unique elements
-s = set()
+# s = set()
 # %%
 s = {4, 2, 3, None}
 print(s)
@@ -669,18 +669,22 @@ for i in range(1, 11):
         print(t)
 # %%
 
-for x in range (1, 11):
-    for y in range (1, 11):
-        print (x*y)
+for x in range(1, 11):
+    for y in range(1, 11):
+        print(x * y)
     print()
+
 
 # %%
 def draw_table():
-    result = ''
-    for x in range (1, 11):
-        for y in range (1, 11):
-            result += '{:4}'.format(x*y)
+    result = ""
+    for x in range(1, 11):
+        for y in range(1, 11):
+            result += f"{x * y:4}"
+        result += "\n"
     return result
+
+
 print(draw_table())
 # %%
 list_ = [[[[1, 4, 5], [[6, 9], [[[8, 1], 7], 3], 2], 7], 5, 2], 9, [1, 2]]
@@ -759,4 +763,41 @@ print(find_lambda([9, 2, 3, lambda a: a / 2.0, 1, 0]))  # [4.5, 1, 1.5, 0.5, 0.0
 
 # %%
 print([x * 2 for x in [1, 2, 3]])
+# %%
+
+
+# Anagram detect
+def is_anagram(str1: str, str2: str) -> bool:
+    return sorted(str1.lower()) == sorted(str2.lower())
+
+
+print(is_anagram("AbbA", "BBaA"))  # True
+# %%
+
+# Mystical Sort
+SEPARATORS = ",;|\t"
+test_string = "boom;dracula,apple|coca-cola|fate|Love and other stuff\tZoomba-yumba"
+
+
+# newlist = [x.replace(";", ",") for x in list]
+def testo_me(arg):
+    x = arg
+    for item in SEPARATORS:
+        x = x.replace(item, ",")
+    splitted = x.split(",")
+    splitted.sort(key=lambda v: v.upper())
+    return ",".join(splitted)
+
+
+testo_me()
+
+print(testo_me(test_string))
+
+
+def test_me(s=test_string):
+    return s
+
+
+# print(test_string)
+
 # %%
