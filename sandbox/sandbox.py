@@ -665,21 +665,14 @@ print(type({"a": 1}))
 
 # %%
 
-<<<<<<< HEAD
 for x in range(1, 11):
     for y in range(1, 11):
         print(x * y)
-=======
-for x in range (1, 11):
-    for y in range (1, 11):
-        print ('{:3}'.format(x*y), end=' ')
->>>>>>> 5d70fc95b4c9b27fcf04f89a41ce739c27402152
     print()
 
 
 # %%
 def draw_table():
-<<<<<<< HEAD
     result = ""
     for x in range(1, 11):
         for y in range(1, 11):
@@ -687,24 +680,6 @@ def draw_table():
         result += "\n"
     return result
 
-=======
-    for x in range (1, 11):
-        for y in range (1, 11):
-            result += '{:4}'.format(x*y)
-    return result
-
-print(draw_table())
-
-# %%
-def draw_table():
-    result = ''
-    for x in range (1, 11):
-        line = '\n'
-        for y in range (1, 11):
-            line += f'{x*y} '
-        result += line
-    return result.format()
->>>>>>> 5d70fc95b4c9b27fcf04f89a41ce739c27402152
 
 print(draw_table())
 # %%
