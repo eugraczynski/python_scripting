@@ -6,6 +6,7 @@
 # import os
 import argparse
 import re
+import types
 # import cantools
 # import zipfile
 # import pathlib
@@ -830,4 +831,40 @@ print(len(d))
 # %%
 d = {None: None}
 print(len(d))
+# %%
+def func():
+    pass
+
+
+print(type(func) == type(lambda: None))
+callable(func)
+# isinstance(func, types.FunctionType)
+print(isinstance(func, type(lambda: None)))
+# %%
+def foo():
+    return x
+
+x = 5
+print(foo())
+# %%
+def f1():
+    return 42
+
+f2 = lambda: 42
+# %%
+def func():
+    print(42)
+
+a = func()
+print(a)
+# %%
+keys = ['a', 'b', 'c']
+values = [1, 2, 3]
+{zip(keys, values)}
+# %%
+{keys: values for keys, values in zip(keys, values)}
+# %%
+filter(lambda x: x % 2 == 0, range(10))
+# %%
+list(filter(lambda x: x % 2 == 0, range(10)))
 # %%
