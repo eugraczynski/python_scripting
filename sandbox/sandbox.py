@@ -756,11 +756,6 @@ def find_lambda(list_):
 print(find_lambda([lambda a: a + 2, 9, 3, 1, 0, lambda a: a + 2]))  # [11, 5, 3, 2]
 print(find_lambda([9, 2, 3, lambda a: a / 2.0, 1, 0]))  # [4.5, 1, 1.5, 0.5, 0.0]
 
-# %%
-print([x * 2 for x in [1, 2, 3]])
-# %%
-
-
 # Anagram detect
 def is_anagram(str1: str, str2: str) -> bool:
     return sorted(str1.lower()) == sorted(str2.lower())
@@ -773,8 +768,6 @@ print(is_anagram("AbbA", "BBaA"))  # True
 SEPARATORS = ",;|\t"
 test_string = "boom;dracula,apple|coca-cola|fate|Love and other stuff\tZoomba-yumba"
 
-
-# newlist = [x.replace(";", ",") for x in list]
 def testo_me(arg):
     x = arg
     for item in SEPARATORS:
@@ -783,16 +776,58 @@ def testo_me(arg):
     splitted.sort(key=lambda v: v.upper())
     return ",".join(splitted)
 
-
-testo_me()
-
 print(testo_me(test_string))
 
+# %%
+# key value swap in dict
+data = {"key1": 25, 100: "value100", "cadabra": "abra", (1,2): (3,4), "shmobject": object, False: None}
 
-def test_me(s=test_string):
-    return s
 
 
-# print(test_string)
+def dict_swap(arg):
+    unhashable_types = [list, dict, object]
+    data_copy = arg.copy()
+    for key, value in arg.items():
+        if type(value) in unhashable_types:
+            del data_copy[key]
+    # return dict([(value, key) for key, value in data_copy.items()])
+    return {key: value for key, value in data_copy.items()}
 
+print(dict_swap(data))
+
+# Advanced task (#2 in tests)
+tricky_data = {"cadabra": "abra", (1,2): [3,4], "oops": {}}
+dict_swap(tricky_data)
+
+# %% 
+# enumerate() return tuples of (index, value)
+lsrere = [1, 2, 3, 4, 5]
+[print(item) for item in enumerate(lsrere)]
+# %%
+# %%
+d = {'a':1, 'b':2, 'c':3}
+print(d['a', 'b'])
+# %%
+d = {2.0: "a", 1: "b", 0: "c"}
+print(d[0])
+# %%
+d = {}
+print(d.get(0, 0))
+# %%
+d = {0: "a", 1: "b", 2: "c"}
+print(d[3])
+# %%
+d = {}
+d.setdefault(0, []).extend("abc")
+print(d)
+print(len(d))
+# %%
+d = {x: y for x in "abc" for y in range(3)}
+print(d)
+# %%
+d = {None: None, None: None, None: None}
+print(len(d))
+# %%
+d = {None: None}
+print(len(d))
 # %%
