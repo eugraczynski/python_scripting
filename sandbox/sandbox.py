@@ -1,17 +1,19 @@
 # from typing import Sequence
 # from faker import Faker
-# import re
+import enum
+import grp
+from operator import attrgetter
+import re
 
 
 # import os
 import argparse
-import re
-import types
+from tabnanny import check
+from unittest import result
 # import cantools
 # import zipfile
 # import pathlib
 # import os
-# import re
 # import xml.etree.ElementTree as ET
 
 # Python is strongly typed language
@@ -630,10 +632,8 @@ print(s)
 s.update({0, 1, 1})
 print(s)
 # %%
-from logging.config import valid_ident
-import sys
 
-print(sys.getsizeof(s))
+# print(sys.getsizeof(s))
 # %%
 d1 = {"a": "1"}
 # %%
@@ -757,6 +757,7 @@ def find_lambda(list_):
 print(find_lambda([lambda a: a + 2, 9, 3, 1, 0, lambda a: a + 2]))  # [11, 5, 3, 2]
 print(find_lambda([9, 2, 3, lambda a: a / 2.0, 1, 0]))  # [4.5, 1, 1.5, 0.5, 0.0]
 
+
 # Anagram detect
 def is_anagram(str1: str, str2: str) -> bool:
     return sorted(str1.lower()) == sorted(str2.lower())
@@ -769,6 +770,7 @@ print(is_anagram("AbbA", "BBaA"))  # True
 SEPARATORS = ",;|\t"
 test_string = "boom;dracula,apple|coca-cola|fate|Love and other stuff\tZoomba-yumba"
 
+
 def testo_me(arg):
     x = arg
     for item in SEPARATORS:
@@ -777,12 +779,19 @@ def testo_me(arg):
     splitted.sort(key=lambda v: v.upper())
     return ",".join(splitted)
 
+
 print(testo_me(test_string))
 
 # %%
 # key value swap in dict
-data = {"key1": 25, 100: "value100", "cadabra": "abra", (1,2): (3,4), "shmobject": object, False: None}
-
+data = {
+    "key1": 25,
+    100: "value100",
+    "cadabra": "abra",
+    (1, 2): (3, 4),
+    "shmobject": object,
+    False: None,
+}
 
 
 def dict_swap(arg):
@@ -794,20 +803,21 @@ def dict_swap(arg):
     # return dict([(value, key) for key, value in data_copy.items()])
     return {key: value for key, value in data_copy.items()}
 
+
 print(dict_swap(data))
 
 # Advanced task (#2 in tests)
-tricky_data = {"cadabra": "abra", (1,2): [3,4], "oops": {}}
+tricky_data = {"cadabra": "abra", (1, 2): [3, 4], "oops": {}}
 dict_swap(tricky_data)
 
-# %% 
+# %%
 # enumerate() return tuples of (index, value)
 lsrere = [1, 2, 3, 4, 5]
 [print(item) for item in enumerate(lsrere)]
 # %%
 # %%
-d = {'a':1, 'b':2, 'c':3}
-print(d['a', 'b'])
+d = {"a": 1, "b": 2, "c": 3}
+print(d["a", "b"])
 # %%
 d = {2.0: "a", 1: "b", 0: "c"}
 print(d[0])
@@ -831,6 +841,8 @@ print(len(d))
 # %%
 d = {None: None}
 print(len(d))
+
+
 # %%
 def func():
     pass
@@ -840,25 +852,34 @@ print(type(func) == type(lambda: None))
 callable(func)
 # isinstance(func, types.FunctionType)
 print(isinstance(func, type(lambda: None)))
+
+
 # %%
 def foo():
     return x
 
+
 x = 5
 print(foo())
+
+
 # %%
 def f1():
     return 42
 
+
 f2 = lambda: 42
+
+
 # %%
 def func():
     print(42)
 
+
 a = func()
 print(a)
 # %%
-keys = ['a', 'b', 'c']
+keys = ["a", "b", "c"]
 values = [1, 2, 3]
 {zip(keys, values)}
 # %%
@@ -867,4 +888,285 @@ values = [1, 2, 3]
 filter(lambda x: x % 2 == 0, range(10))
 # %%
 list(filter(lambda x: x % 2 == 0, range(10)))
+# %%
+"""Task is to return the percent rated value of current battery capacity parsed from given string 
+(let's assume it is some shell command's result).
+
+Current level should be calculated as CurrentCapacity / MaxCapacity in percents. The resulting value should be like the following example:
+
+61.41%
+
+There are two ways:
+
+Parse from LegacyBatteryInfo block - this is super easy. If you are beginner - try to get needed info from this line.
+Parse from MaxCapacity/CurrentCapacity attributes - more complex task for more experienced programmers. If you want challenge - try to get information without using data from LegacyBatteryInfo block.
+The result of the function should be in the form of the string: "XX.YY%" where XX.YY is the float number of percents with 2 digits after dot."""
+# %%
+data = """
+        "SuperMaxCapacity" =0
+        "MaxCapacity": +4540;
+        'CurrentCapacity'=   2897,
+        "LegacyBatteryInfo" = {"Amperage"=18446744073709550521,"Flags"=4,"Capacity"=4540,"Current"=2897,"Voltage"=7283,"Cycle Count"=406}
+        "MegaMaxCapacity" = 6700
+"""
+import re
+
+# data = data.replace('\'', '"')
+# print(re.findall(r"(?:\"|\')\w+.+\d", data))
+x = re.findall(r"(?:\"|\')\w+.+\d", data)
+
+
+# y = (item.replace("=", ":") for item in x)
+# print(y)
+# print(list(dict(y)))
+# for u in y:
+#     print(u)
+#     tup = tuple(u)
+#     print(tup)
+
+
+def get_battery_level(data):
+    max_capacity = re.search(r"\"MaxCapacity\"\:\s+\+(\d+)", data)
+    current_capacity = re.search(r"\'CurrentCapacity\'\=\s+(\d+)", data)
+    res = int(current_capacity.group(1)) / int(max_capacity.group(1)) * 100
+    return f"{res:.2f}%"
+
+
+get_battery_level(data)
+
+# %%
+"""
+Task:
+Write a function that gives all the ways to divide a list of at least two elements in two non-empty parts.
+
+Each two non empty parts will be in a tuple
+Each part will be in a string
+Elements of a pair must be in the same order as in the original array.
+Example:
+>>> a = ["az", "toto", "picaro", "zone", "kiwi"]
+>>> partlist(a)
+
+[('az', 'toto picaro zone kiwi'), ('az toto', 'picaro zone kiwi'), ('az toto picaro', 'zone kiwi'), ('az toto picaro zone', 'kiwi')]
+"""
+
+# %%
+test_data = ["az", "toto", "picaro", "zone", "kiwi"]
+
+
+def partlist(list_):
+    result = list()
+    for iter, item in enumerate(list_):
+        if iter != 0:
+            start = ""
+            end = ""
+            for i in range(0, iter):
+                start += " " + list_[i]
+            for k in range(iter, len(list_)):
+                end += " " + list_[k]
+            result.append((start.strip(), end.strip()))
+    return result
+    # print(end)
+    # print(result)
+
+
+print(partlist(test_data))
+
+# %%
+# Group Anagrams
+"""Task is to process all words from input sequence and return a list with lists from those words that are anagrams with others in their list
+
+A typical test could be :
+
+list_ = ["tsar", "rat", "tar", "star", "tars", "cheese"]
+group_anagrams(list_)  # [["tsar", "star", "tars"], ["rat", "tar"], ["cheese"]]
+NOTE: the order of words in resulted lists should follow the order of appearance."""
+
+# %%
+test_list = ["tsar", "rat", "tar", "star", "tars", "cheese"]
+
+
+def group_anagrams(words):
+    anagram = {}
+    for word in words:
+        str_ = "".join(sorted(word))
+        if str_ in anagram:
+            anagram[str_].append(word)
+        else:
+            anagram[str_] = [word]
+
+    return list(anagram.values())
+
+
+print(group_anagrams(test_list))
+print(group_anagrams(["abbA", "boom", "Mobo", "AbAb"]))
+# %%
+import this
+# %%
+def func():
+    print(42)
+
+a = func()
+print(a)
+# %%
+def f1():
+    return 42
+
+f2 = lambda: 42
+# %%
+a = []
+def f(x, y):
+    a.append("z")
+f(a.append("x"), a.append("y"))
+
+print(a)
+# %%
+# def func:
+#     print(42)
+
+# a = func()
+# print(a)
+# %%
+# ZASHKWAR SECTION
+
+def boo():
+    func = lambda: x
+    x = 5
+    return func
+
+boo()()
+# %%
+numbers = [1, 2, 3, 4]
+numbers.append([5,6,7,8])
+len(numbers)
+# %%
+def gen(i):
+   for x in range(i):
+       if x < 3:
+           yield x
+       else:
+           break
+   else:
+       yield 10
+
+sum(list(gen(3))), sum(list(gen(10)))
+# %%
+len(x for x in range(1, 5) if x % 2)
+# %%
+a, (b, (c,)) = [1, (2, {3:4})]
+print(a,b,c)
+
+# %%
+class A:
+    x = 1
+
+class B(A):
+    x = 2
+
+class C(A, B):
+    pass
+
+print( C().x )
+# %%
+class A:
+    x = 1
+
+class B(A):
+    x = 2
+
+class C(A, B):
+    pass
+
+print( C().x )
+# %%
+list_ = [1, 2, 3, 4]
+list_[1:3] = []
+print(list_)
+# %%
+0b10 + 0o10 + 0x10
+# %%
+def boo():
+    x = 5
+    func = lambda: x
+    del x
+    return func
+
+boo()()
+# %%
+# ?????????????????????????????? why
+list_ = [ [] ] * 5
+list_[0].append(1)
+list_
+# %%
+x = 1
+y = 2
+z = 1
+
+if x < y < z: print(x, end=" "); print(y, end=" "); print(z)
+# %%
+class A:
+    a = 10
+    b = a
+    c = [a + i for i in range(3)]
+
+obj = A()
+print(obj.a, obj.b, obj.c)
+# %%
+class A:
+    a = 10
+    b = a
+    c = [A.a + i for i in range(3)]
+
+obj = A()
+print(obj.a, obj.b, obj.c)
+# %%
+class A: 
+    attr = 10
+    def __init__(self):
+        self.attr = 20
+
+print(A.attr, A().attr)
+# %%
+
+class CLS():
+    attr = 10
+    def __init__(self):
+        self.attr = 20
+    
+    def called(self):
+        return self.attr
+    
+inst = CLS()
+inst.__dict__
+inst.__getattribute__('attr')
+# %%
+class CLS():
+    attr = 10
+    def __init__(self):
+        self.attr = 20
+    
+    def called(self):
+        return self.attr
+    
+# %%
+class A: 
+    def m(self):
+        return "A"
+
+class B(A):
+    def m(self):
+        return super().m() + "B"
+
+print(B().m())
+# %%
+class A: 
+    def __init__(self, value):
+        self.value = value
+
+    def __add__(self, other):
+        return A(self.value + other.value)
+
+    def __str__(self):
+        return "A, value: {}".format(self.value)
+
+print(A(10) + A(20))
 # %%
