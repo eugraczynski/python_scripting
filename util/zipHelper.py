@@ -4,7 +4,7 @@ import zipfile
 import os
 
 
-class ZipHelper:
+class ZipHelper():
     def __init__(
         self,
         path: str,

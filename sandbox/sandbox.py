@@ -2,14 +2,11 @@
 # from faker import Faker
 import enum
 import grp
-from operator import attrgetter
 import re
 
 
 # import os
 import argparse
-from tabnanny import check
-from unittest import result
 # import cantools
 # import zipfile
 # import pathlib
@@ -1169,4 +1166,19 @@ class A:
         return "A, value: {}".format(self.value)
 
 print(A(10) + A(20))
+# %%
+def func(arg1, arg2, /, arg3, *, arg4):
+    print(arg1, arg2, arg3, arg4)
+        
+func(1, 2, arg3=3, arg4=4)
+# %%
+def func(arg1, arg2, *args, **kwargs):
+    [print(item) for item in (arg1, arg2, args, kwargs.values())]
+    print(*args)
+    print(kwargs.items(), kwargs.keys(), kwargs.values())
+        
+func(1, 2, 4,5,6,7 , arg4=4, arg5=5)
+# %%
+a = [1, 2, 3]
+print(*a)
 # %%

@@ -26,19 +26,23 @@ parser.add_argument(
 )
 args = parser.parse_args()
 
-# args_set = set()
-# if args.path is not None:
-#     args_set.add(args.path)
-# if args.mode is not None:
-#     args_set.add(args.mode)
+args_set = []
 
-# print(r",".join(args_set))
-# a, b = args_set
-# print(a, b)
-# print(args_set)
+if args.path is not None:
+    args_set.append(args.path)
+else:
+    raise TypeError("Path argument is required")
 
+if args.mode is not None:
+    args_set.append(args.mode)
 
-zipper = zipModule.ZipHelper(args.path, args.mode, args.source, args.destination)
+if args.source is not None:
+    args_set.append(args.source)
+
+if args.destination is not None:
+    args_set.append(args.destination)
+
+zipper = zipModule.ZipHelper(*args_set)
 
 """
 1. remake main with the arg to have at least 2 following args, mode and path to unzip (we will add more once we have more functionalities) 
