@@ -5,9 +5,9 @@ import util.zipHelper as zipModule
 # argparse section
 parser = argparse.ArgumentParser(description="Process some tasks.")
 parser.add_argument(
-    "-m", "--mode", action="store", type=str, help="Pack, Unpack, Cleanup"
+    "-m", "--mode", action="store", type=str, help="Pack, Unpack, Cleanup", default=None
 )
-parser.add_argument("-p", "--path", action="store", type=str, help="Path to zip")
+parser.add_argument("-p", "--path", action="store", type=str, help="Path to zip", default=None)
 parser.add_argument(
     "-s",
     "--source",

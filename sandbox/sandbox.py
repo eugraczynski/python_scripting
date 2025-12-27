@@ -1182,3 +1182,20 @@ func(1, 2, 4,5,6,7 , arg4=4, arg5=5)
 a = [1, 2, 3]
 print(*a)
 # %%
+
+def decor(base_func):
+    def wrapper(*args, **kwargs):
+        print("Before function call")
+        base_func()
+        print("After function call")
+        return 'end'
+    return wrapper
+
+
+@decor
+def funcky():
+    print("Inside function")
+
+
+funcky()
+# %%
