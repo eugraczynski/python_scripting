@@ -7,6 +7,7 @@ import re
 
 # import os
 import argparse
+import time
 # import cantools
 # import zipfile
 # import pathlib
@@ -1182,20 +1183,103 @@ func(1, 2, 4,5,6,7 , arg4=4, arg5=5)
 a = [1, 2, 3]
 print(*a)
 # %%
+import time
 
 def decor(base_func):
-    def wrapper(*args, **kwargs):
+    def wrapper():
+        start = time.time()
+
         print("Before function call")
+
         base_func()
+
         print("After function call")
+
+        print(f'start - end: {(time.time() - start):.9f}', )
+
         return 'end'
     return wrapper
 
 
 @decor
 def funcky():
-    print("Inside function")
+    print("INSIDE FUNCTION")
 
 
 funcky()
+# %%
+# ENCAPSULATION
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.__age = age
+
+    # def __str__(self):
+    #     return f"Name: {self.name}, Age: {self.__age}"
+
+    def get_age(self):
+        return self.__age
+
+    def set_age(self, age):
+            self.__age = age
+ 
+
+person = Person("John Doe", 30)
+print(person)
+
+# print(person.__age) # AttributeError
+
+person.__age = 35  # This will not change the actual age
+print(person)
+
+print(person.get_age())  # Accessing age via getter
+
+person.set_age(35)  # Changing age via setter
+print(person)
+
+
+person.__age = 35  # This will not change the actual age, but do smth 
+                   # with variable itself??????
+print(person)
+
+print(person.__age) # NO AttributeError
+# %%
+# Polymorphism
+class DOG:
+    def sound(self):
+        return "Woof!"
+class CAT:
+    def sound(self):
+        return "Meow!"
+
+doggo = DOG()
+catto = CAT()
+
+for animal in (doggo, catto):
+    print(animal.sound())
+# %%
+# Inheritance
+class Animal:
+    def __init__(self, name):
+        self.name = name
+
+    def name_info(self):
+        return f"Animal's name is {self.name}"
+    
+class Dog(Animal):
+    def bark(self):
+        return f"{self.name} says Woof!"
+
+class Cat(Animal):
+    def meow(self):
+        return f"{self.name} says Meow!"
+
+doggo = Dog("Buddy")
+catto = Cat("Whiskers")
+
+print(doggo.bark())
+print(catto.meow())
+print(doggo.name_info())
+print(catto.name_info())
+
 # %%
