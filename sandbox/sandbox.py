@@ -1283,3 +1283,48 @@ print(doggo.name_info())
 print(catto.name_info())
 
 # %%
+params = ['a', 'b', 'c', 'd']
+print(*params)
+# %%
+print(hash(42))  #int, hashable
+print(hash(3.14))  #float, hashable
+print(hash("hello"))  #string, hashable
+print(hash(b'bytes'))  #bytes, hashable
+print(hash(range(10)))  #range, hashable
+print(hash(None))  #NoneType, hashable
+print(hash(True))  #bool, hashable
+print(hash(3 + 4j))  #complex, hashable
+print(hash(bytes([1,2,3])) ) #bytes, hashable
+print(hash((1, 2)))  #tuple of immutable objects, hashable
+print(hash((1, (2, 3), "four")))  #tuple of immutable objects, hashable
+print(hash(()))  #empty tuple, hashable
+print(hash(frozenset()))  #empty frozenset, hashable
+print(hash(frozenset([1, 2, 3])))  #frozenset of immutable objects, hashable
+print(hash((42, "answer", 3.14)))  #tuple of immutable objects, hashable
+print(hash((None, True, False)))  #tuple of immutable objects, hashable
+print(hash((b'bytes', bytes([1,2,3])))) #tuple of immutable objects, hashable
+print(hash((3 + 4j, 1 + 2j)))  #tuple of immutable objects, hashable
+print(hash(range(5, 15)))  #range, hashable
+print(hash("".join(["a", "b", "c"])))  #string, hashable
+print(hash((1.1, 2.2, 3.3)))  #tuple of immutable objects, hashable
+
+print(hash((1,2,3))) #tuple of immutable objects, hashable
+print(hash(frozenset([1,2]))) #hashable
+
+# x = hash(set([1,2])) #set unhashable
+# x = hash(([1,2], [2,3])) #tuple of mutable objects, unhashable
+# x = hash({1,2}) #list of mutable objects, unhashable
+# x = hash([1,2,3]) #list of immutable objects, unhashable
+
+
+# List of immutable types:
+
+# int, float, decimal, complex, bool, string, tuple, range, frozenset, bytes
+
+# List of mutable types:
+
+# list, dict, set, bytearray, user-defined classes
+
+
+
+# %%
