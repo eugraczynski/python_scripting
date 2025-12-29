@@ -999,21 +999,31 @@ print(group_anagrams(test_list))
 print(group_anagrams(["abbA", "boom", "Mobo", "AbAb"]))
 # %%
 import this
+
+
 # %%
 def func():
     print(42)
 
+
 a = func()
 print(a)
+
+
 # %%
 def f1():
     return 42
 
+
 f2 = lambda: 42
 # %%
 a = []
+
+
 def f(x, y):
     a.append("z")
+
+
 f(a.append("x"), a.append("y"))
 
 print(a)
@@ -1026,55 +1036,69 @@ print(a)
 # %%
 # ZASHKWAR SECTION
 
+
 def boo():
     func = lambda: x
     x = 5
     return func
 
+
 boo()()
 # %%
 numbers = [1, 2, 3, 4]
-numbers.append([5,6,7,8])
+numbers.append([5, 6, 7, 8])
 len(numbers)
+
+
 # %%
 def gen(i):
-   for x in range(i):
-       if x < 3:
-           yield x
-       else:
-           break
-   else:
-       yield 10
+    for x in range(i):
+        if x < 3:
+            yield x
+        else:
+            break
+    else:
+        yield 10
+
 
 sum(list(gen(3))), sum(list(gen(10)))
 # %%
 len(x for x in range(1, 5) if x % 2)
 # %%
-a, (b, (c,)) = [1, (2, {3:4})]
-print(a,b,c)
+a, (b, (c,)) = [1, (2, {3: 4})]
+print(a, b, c)
+
 
 # %%
 class A:
     x = 1
 
+
 class B(A):
     x = 2
+
 
 class C(A, B):
     pass
 
-print( C().x )
+
+print(C().x)
+
+
 # %%
 class A:
     x = 1
 
+
 class B(A):
     x = 2
+
 
 class C(A, B):
     pass
 
-print( C().x )
+
+print(C().x)
 # %%
 list_ = [1, 2, 3, 4]
 list_[1:3] = []
@@ -1082,16 +1106,16 @@ print(list_)
 # %%
 0b10 + 0o10 + 0x10
 # %%
-def boo():
-    x = 5
-    func = lambda: x
-    del x
-    return func
+# def boo():
+#     x = 5
+#     func = lambda: x
+#     del x
+#     return func
 
-boo()()
+# boo()()
 # %%
 # ?????????????????????????????? why
-list_ = [ [] ] * 5
+list_ = [[]] * 5
 list_[0].append(1)
 list_
 # %%
@@ -1099,64 +1123,88 @@ x = 1
 y = 2
 z = 1
 
-if x < y < z: print(x, end=" "); print(y, end=" "); print(z)
+if x < y < z:
+    print(x, end=" ")
+    print(y, end=" ")
+    print(z)
+
+
 # %%
 class A:
     a = 10
     b = a
     c = [a + i for i in range(3)]
 
+
 obj = A()
 print(obj.a, obj.b, obj.c)
+
+
 # %%
 class A:
     a = 10
     b = a
     c = [A.a + i for i in range(3)]
 
+
 obj = A()
 print(obj.a, obj.b, obj.c)
+
+
 # %%
-class A: 
+class A:
     attr = 10
+
     def __init__(self):
         self.attr = 20
+
 
 print(A.attr, A().attr)
 # %%
 
-class CLS():
+
+class CLS:
     attr = 10
+
     def __init__(self):
         self.attr = 20
-    
+
     def called(self):
         return self.attr
-    
+
+
 inst = CLS()
 inst.__dict__
-inst.__getattribute__('attr')
+inst.__getattribute__("attr")
+
+
 # %%
-class CLS():
+class CLS:
     attr = 10
+
     def __init__(self):
         self.attr = 20
-    
+
     def called(self):
         return self.attr
-    
+
+
 # %%
-class A: 
+class A:
     def m(self):
         return "A"
+
 
 class B(A):
     def m(self):
         return super().m() + "B"
 
+
 print(B().m())
+
+
 # %%
-class A: 
+class A:
     def __init__(self, value):
         self.value = value
 
@@ -1165,6 +1213,7 @@ class A:
 
     def __str__(self):
         return "A, value: {}".format(self.value)
+
 
 print(A(10) + A(20))
 # %%
