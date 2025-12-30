@@ -1332,3 +1332,5 @@ print(doggo.name_info())
 print(catto.name_info())
 
 # %%
+# https://portal.mhhelpline.com/
+# GlobalLogic*3*2025
