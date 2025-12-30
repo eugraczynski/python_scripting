@@ -1216,23 +1216,30 @@ class A:
 
 
 print(A(10) + A(20))
+
+
 # %%
 def func(arg1, arg2, /, arg3, *, arg4):
     print(arg1, arg2, arg3, arg4)
-        
+
+
 func(1, 2, arg3=3, arg4=4)
+
+
 # %%
 def func(arg1, arg2, *args, **kwargs):
     [print(item) for item in (arg1, arg2, args, kwargs.values())]
     print(*args)
     print(kwargs.items(), kwargs.keys(), kwargs.values())
-        
-func(1, 2, 4,5,6,7 , arg4=4, arg5=5)
+
+
+func(1, 2, 4, 5, 6, 7, arg4=4, arg5=5)
 # %%
 a = [1, 2, 3]
 print(*a)
 # %%
 import time
+
 
 def decor(base_func):
     def wrapper():
@@ -1244,9 +1251,12 @@ def decor(base_func):
 
         print("After function call")
 
-        print(f'start - end: {(time.time() - start):.9f}', )
+        print(
+            f"start - end: {(time.time() - start):.9f}",
+        )
 
-        return 'end'
+        return "end"
+
     return wrapper
 
 
@@ -1256,6 +1266,8 @@ def funcky():
 
 
 funcky()
+
+
 # %%
 # ENCAPSULATION
 class Person:
@@ -1270,8 +1282,8 @@ class Person:
         return self.__age
 
     def set_age(self, age):
-            self.__age = age
- 
+        self.__age = age
+
 
 person = Person("John Doe", 30)
 print(person)
@@ -1287,25 +1299,32 @@ person.set_age(35)  # Changing age via setter
 print(person)
 
 
-person.__age = 35  # This will not change the actual age, but do smth 
-                   # with variable itself??????
+person.__age = 35  # This will not change the actual age, but do smth
+# with variable itself??????
 print(person)
 
-print(person.__age) # NO AttributeError
+print(person.__age)  # NO AttributeError
+
+
 # %%
 # Polymorphism
 class DOG:
     def sound(self):
         return "Woof!"
+
+
 class CAT:
     def sound(self):
         return "Meow!"
+
 
 doggo = DOG()
 catto = CAT()
 
 for animal in (doggo, catto):
     print(animal.sound())
+
+
 # %%
 # Inheritance
 class Animal:
@@ -1314,14 +1333,17 @@ class Animal:
 
     def name_info(self):
         return f"Animal's name is {self.name}"
-    
+
+
 class Dog(Animal):
     def bark(self):
         return f"{self.name} says Woof!"
 
+
 class Cat(Animal):
     def meow(self):
         return f"{self.name} says Meow!"
+
 
 doggo = Dog("Buddy")
 catto = Cat("Whiskers")
@@ -1331,6 +1353,50 @@ print(catto.meow())
 print(doggo.name_info())
 print(catto.name_info())
 
+params = ["a", "b", "c", "d"]
+print(*params)
+# %%
+print(hash(42))  # int, hashable
+print(hash(3.14))  # float, hashable
+print(hash("hello"))  # string, hashable
+print(hash(b"bytes"))  # bytes, hashable
+print(hash(range(10)))  # range, hashable
+print(hash(None))  # NoneType, hashable
+print(hash(True))  # bool, hashable
+print(hash(3 + 4j))  # complex, hashable
+print(hash(bytes([1, 2, 3])))  # bytes, hashable
+print(hash((1, 2)))  # tuple of immutable objects, hashable
+print(hash((1, (2, 3), "four")))  # tuple of immutable objects, hashable
+print(hash(()))  # empty tuple, hashable
+print(hash(frozenset()))  # empty frozenset, hashable
+print(hash(frozenset([1, 2, 3])))  # frozenset of immutable objects, hashable
+print(hash((42, "answer", 3.14)))  # tuple of immutable objects, hashable
+print(hash((None, True, False)))  # tuple of immutable objects, hashable
+print(hash((b"bytes", bytes([1, 2, 3]))))  # tuple of immutable objects, hashable
+print(hash((3 + 4j, 1 + 2j)))  # tuple of immutable objects, hashable
+print(hash(range(5, 15)))  # range, hashable
+print(hash("".join(["a", "b", "c"])))  # string, hashable
+print(hash((1.1, 2.2, 3.3)))  # tuple of immutable objects, hashable
+
+print(hash((1, 2, 3)))  # tuple of immutable objects, hashable
+print(hash(frozenset([1, 2])))  # hashable
+
+# x = hash(set([1,2])) #set unhashable
+# x = hash(([1,2], [2,3])) #tuple of mutable objects, unhashable
+# x = hash({1,2}) #list of mutable objects, unhashable
+# x = hash([1,2,3]) #list of immutable objects, unhashable
+
+
+# List of immutable types:
+
+# int, float, decimal, complex, bool, string, tuple, range, frozenset, bytes
+
+# List of mutable types:
+
+# list, dict, set, bytearray, user-defined classes
+
+
+# %%
 # %%
 # https://portal.mhhelpline.com/
 # GlobalLogic*3*2025

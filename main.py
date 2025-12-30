@@ -4,10 +4,10 @@ import util.zipHelper as zipModule
 
 # argparse section
 parser = argparse.ArgumentParser(description="Process some tasks.")
-parser.add_argument(
-    "-m", "--mode", action="store", type=str, help="Pack, Unpack, Cleanup", default=None
-)
 parser.add_argument("-p", "--path", action="store", type=str, help="Path to zip", default=None)
+parser.add_argument(
+    "-m", "--mode", action="store", type=str, help="Pack, Unpack, Cleanup", default="unpack"
+)
 parser.add_argument(
     "-s",
     "--source",
@@ -26,23 +26,23 @@ parser.add_argument(
 )
 args = parser.parse_args()
 
-args_set = []
+# args_set = []
 
-if args.path is not None:
-    args_set.append(args.path)
-else:
-    raise TypeError("Path argument is required")
+# if args.path is not None:
+#     args_set.append(args.path)
+# else:
+#     raise TypeError("Path argument is required")
 
-if args.mode is not None:
-    args_set.append(args.mode)
+# if args.mode is not None:
+#     args_set.append(args.mode)
 
-if args.source is not None:
-    args_set.append(args.source)
+# if args.source is not None:
+#     args_set.append(args.source)
 
-if args.destination is not None:
-    args_set.append(args.destination)
+# if args.destination is not None:
+#     args_set.append(args.destination)
 
-zipper = zipModule.ZipHelper(*args_set)
+zipper = zipModule.ZipHelper(args.path, args.mode, args.source, args.destination)
 
 """
 1. remake main with the arg to have at least 2 following args, mode and path to unzip (we will add more once we have more functionalities) 
