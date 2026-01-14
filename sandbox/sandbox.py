@@ -1427,3 +1427,20 @@ shapes = [Circle(5), Rectangle(4, 6)]
 for shape in shapes:
     print(f"Area: {shape.area()}")
 # %%
+
+class One:
+    a = 1
+
+class Two(One):
+    def __init__(self):
+        self.a = 2
+    b = 2
+    c = One.a + 1
+
+awdadwad = Two()
+print(awdadwad.c)
+# %%
+json_data = {
+    "name": "John Doe",
+    "age": 30}
+
