@@ -2,9 +2,19 @@ import pytest
 import time
 
 
+@pytest.fixture(scope="function")
+def setup_function():
+    print("Function-level setup")
+    yield
+
+@pytest.fixture(scope="class")
+def setup_function():
+    print("Class-level setup")
+    yield
+
 @pytest.fixture(scope="session")
-def setup_session():
-    print("Setting up session resources")
+def setup_function():
+    print("Session-level setup")
     yield
 
 
