@@ -24,11 +24,9 @@ def setup_function():
 def time_dec(base_func):
     def wrapper():
         start = time.time()
-        a = 123
-        base_func(a)
+        base_func()
         end = time.time()
         print(f"Function '{base_func.__name__}' executed in {end - start:.10f} seconds")
-        print(f"1nd decorator executed {time.time()}")
     return wrapper
 
 
