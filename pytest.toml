@@ -1,11 +1,12 @@
 [pytest]
 addopts = ["--strict-markers"]
-usefixtures = ["setup_session"]
+usefixtures = ["setup_function"]
 markers = [
     "slow: marks tests as slow (deselect with '-m \"not slow\"')",
     "sample",
     "serial",
     "classy",
     "inClassy",
-    "other"
+    "other",
+    "debug"
 ]

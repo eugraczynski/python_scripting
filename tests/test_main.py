@@ -5,7 +5,7 @@ import time
 
 
 @pytest.mark.sample
-@pytest.mark.usefixtures("setup_session") # using fixture from conftest.py
+@pytest.mark.usefixtures("setup_function") # using fixture from conftest.py
 def test_sample(x=1):
     assert x + 1 == 2
 
@@ -29,6 +29,10 @@ class TestClass:
 class TestClassOther:
     def test_method(self):
         assert "hello".upper() == "mda"
+
+# @pytest.mark.parametrize("input,expected", [(1, 2), (3, 4), (5, 6)])
+# def test_param(input, expected):
+#     assert input + 2 == expected
 
 
 # @time_dec # decorator is not globally available
