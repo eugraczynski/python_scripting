@@ -20,7 +20,7 @@ def compute_time():
         time.sleep(0.5)
     return rv
 
-compute_time()
+# compute_time()
 
 @time_dec_x_times()
 def compute_time_2():
@@ -31,6 +31,31 @@ def compute_time_2():
         time.sleep(0.5)
     yield rv
 
-compute_time_2()
-for item in compute_time_2():
-    print(item)
+# compute_time_2()
+
+
+def api():
+    x = 'first action'
+    yield x
+    y = 'second action'
+    yield y
+    z = 'third action'
+    yield z
+
+# if function contains yield keyword, it becomes generator
+print(type(api()))
+
+x = api()
+
+print(type(x))
+
+
+# looping through generator
+for y in x:
+    print(y)
+
+# which is equal to:
+# print(next(x))
+# print(next(x))
+# print(next(x))
+
