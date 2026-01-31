@@ -1,6 +1,28 @@
 nums_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
+# Lambda is anonymous function
 
 # high-order functions: functions that take other functions as arguments
-list(filter(lambda x: x % 2 == 0, nums_list))
-list(map(lambda x: x * 2, nums_list))
+# e.g. passing function as an argument to another function
+def function_list(list_func: function, nums: list) -> list:
+    return list_func(nums)
+
+def list_func(num: list) -> list:
+    return num.reverse()
+
+
+
+print(function_list(list_func, nums_list))
+
+# the same way using lambda you can pass function as an argument
+print(function_list(lambda x: x.reverse(), nums_list))  
+
+
+# filter keeps only speciefic values, like, dividable by 2
+a = list(filter(lambda x: x % 2 == 0, nums_list))
+
+# map apply to each element of a list
+# map object needs to be converted to list type
+b = list(map(lambda x: x * 2, nums_list))
+
+print(a,b)

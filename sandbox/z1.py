@@ -2,13 +2,13 @@ def z1_function():
     print("This is z1 function")
 
 
-z1_function()
+# z1_function()
 
 
 x = "x from z1"
 
 
-def z2_outscoped():
+def z1_outscoped():
     print(x)
 
 
