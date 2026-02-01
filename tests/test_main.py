@@ -1,12 +1,10 @@
 import pytest
-import time
-
 
 
 
 @pytest.mark.sample
 @pytest.mark.usefixtures("setup_function") # using fixture from conftest.py
-def test_sample(x=1):
+def test_sample(x: int = 1):
     assert x + 1 == 2
 
 @pytest.mark.serial

@@ -1,7 +1,5 @@
 # from typing import Sequence
 # from faker import Faker
-import enum
-import grp
 import re
 
 
@@ -576,7 +574,7 @@ len(r"\n")  # length is two
 
 # %%
 
-list_ = [None, 1, 2, 3]
+list_: list[None | int] = [None, 1, 2, 3]
 # list_.__len__()
 list_[-1]
 # print(list_.copy())
@@ -1239,9 +1237,9 @@ a = [1, 2, 3]
 print(*a)
 # %%
 import time
+from typing import Callable
 
-
-def decor(base_func):
+def decor(base_func: Callable[..., None]):
     def wrapper():
         start = time.time()
 
@@ -1271,21 +1269,21 @@ funcky()
 # %%
 # ENCAPSULATION
 class Person:
-    def __init__(self, name, age):
+    def __init__(self, name: str, age: str):
         self.name = name
         self.__age = age
 
     # def __str__(self):
     #     return f"Name: {self.name}, Age: {self.__age}"
 
-    def get_age(self):
+    def get_age(self) -> str:
         return self.__age
 
-    def set_age(self, age):
+    def set_age(self, age: str):
         self.__age = age
 
 
-person = Person("John Doe", 30)
+person = Person("John Doe", '30')
 print(person)
 
 # print(person.__age) # AttributeError

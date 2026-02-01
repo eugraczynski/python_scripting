@@ -11,3 +11,7 @@ print(globals())
 
 if "z2_outscoped" in globals():
     print("yes")
+
+
+if __name__ == "__main__":
+    z1.main()

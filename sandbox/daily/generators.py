@@ -1,8 +1,9 @@
 import time
+from typing import Any, Callable, Generator
 
-def time_dec_x_times(x=1):
-    def decorator(base_func):
-        def wrapper(*args, **kwargs):
+def time_dec_x_times(x: int=1):
+    def decorator(base_func: Callable[..., list[int] | None | Generator[list[int], Any, None]]):
+        def wrapper(*args: ..., **kwargs: ...):
             start = time.time()
             for _ in range(x):
                 base_func(*args, **kwargs)
@@ -12,8 +13,8 @@ def time_dec_x_times(x=1):
     return decorator
 
 @time_dec_x_times()
-def compute_time():
-    rv = []
+def compute_time() -> list[int]:
+    rv: list[int] = []
     for i in range(10):
         if i % 2 == 0:
             rv.append(i)
@@ -24,7 +25,7 @@ def compute_time():
 
 @time_dec_x_times()
 def compute_time_2():
-    rv = []
+    rv: list[int] = []
     for i in range(10):
         if i % 2 == 0:
             rv.append(i)
