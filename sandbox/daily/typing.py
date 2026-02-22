@@ -7,3 +7,7 @@
 
 # proper any should be imported
 # from typing import Any
+
+nums = [1,2,3,4]
+sorted(nums)
+nums.sort()

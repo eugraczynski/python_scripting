@@ -1424,12 +1424,83 @@ shapes = [Circle(5), Rectangle(4, 6)]
 
 for shape in shapes:
     print(f"Area: {shape.area()}")
+
+# %%
+# slicing - create a var with same notation
+numbers: list[int] = [1, 2, 3, 4, 5]
+text: str = "Hello, World!"
+
+# slicing - create a var with same notation
+rev: slice = slice(None, None, -1) # instead of [::-1]
+f_five: slice = slice(None, 5) # instead of [:5]
+
+print(numbers[rev])  # Output: [5, 4, 3, 2, 1]
+print(text[rev])  # Output: "!dlroW ,olleH"
+print(numbers[f_five])  # Output: [1, 2, 3, 4, 5]
+print(text[f_five])  # Output: "Hello"
+
+# %%
+set_1 = {1,2,3,4,5}
+set_2 = {4,5,6,7,8}
+
+print(set_1 | set_2) # union of sets returns 1,2,3,4,5,6,7,8
+print(set_1 & set_2) # intersection of sets returns 4,5
+print(set_1 - set_2) # difference of sets returns 1,2,3
+print(set_1 ^ set_2) # symmetric difference of sets returns 1,2,3,6,7,8
 # %%
 
 
-# %%
-json_data = {
+json_data: dict[str, str | int] = {
     "name": "John Doe",
     "age": 30}
 
+# user: str | None = json_data.get("name")
 
+# on right side is a condition, if true it assings value to variable on the left
+if user := json_data.get("nasme"): # walrus operator assigns value to variable 
+    print(f"User found: {user}")
+else: 
+    print('no such user')
+
+
+# %%
+# script importing solid template
+def greet() -> None:
+    print('hi')
+
+def bye() -> None:
+    print('bye')
+
+if __name__ == '__main__':
+    greet()
+    bye()
+
+
+# %%
+# if true as function returns
+
+def is_true(_str: str) -> bool:
+    return _str.lower() == 'true string'
+
+
+if is_true('TRUE STRING'):
+    print("indeed it's true")
+# %%
+# docstrings for documentations 
+# or / and 
+# type annotations
+
+def int_to_str(_int):
+    """
+    Converts int to str \n lalala
+    """
+    return str(_int)
+
+def str_to_int(_str: str) -> int:
+    return int(_str)
+
+int_to_str(3)
+
+str_to_int('4')
+# %%
+print(list('123'))
